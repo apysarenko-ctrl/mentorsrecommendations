@@ -1,0 +1,1769 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рекомендації ментора — GoIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* GoIT brand — based on goit.global */
+    --cream:#F1EFE8;          /* Page background */
+    --cream-2:#E8E6DF;        /* Pills, soft surfaces */
+    --cream-3:#DEDDD3;        /* Borders */
+
+    --black:#0F0F0F;          /* Brand black */
+    --black-2:#1A1A1A;
+    --grey-700:#3D3D3D;
+    --grey-500:#7A7A7A;
+    --grey-300:#CFCFCF;
+    --grey-100:#F4F4F4;
+    --white:#FFFFFF;
+
+    --orange:#F89557;         /* GoIT signature orange (CTA banners) */
+    --orange-2:#FF8A4D;
+    --orange-soft:#FFC1A1;    /* Bestseller tag, soft accents */
+    --orange-pale:#FFE6D6;
+    --peach:#F8DAC9;
+
+    --primary:var(--orange);
+    --primary-2:var(--orange-2);
+    --accent:var(--black);
+    --text:var(--black);
+    --muted:var(--grey-500);
+    --bg:var(--cream);
+    --card:#FFFFFF;
+    --border:var(--cream-3);
+
+    --error-bg:#FFE9E5; --error-bd:#D9412C; --error-tx:#9C2A1A;
+    --why-bg:#EAE8E0;   --why-bd:#3D3D3D;   --why-tx:#1A1A1A;
+    --how-bg:#FFEEDF;   --how-bd:var(--orange);  --how-tx:#A35418;
+    --ex-bg:#F4F2EA;    --ex-bd:#7A7A7A;    --ex-tx:#3D3D3D;
+    --warn-bg:#FFF3D6;  --warn-bd:#D49000;  --warn-tx:#7A5A00;
+    --tip-bg:#FFE6D6;   --tip-bd:var(--orange-2); --tip-tx:#8A3A0F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* TOP BAR — GoIT pill-style header */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(241,239,232,.92);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    padding:14px 0;
+  }
+  .topbar-inner{
+    max-width:1280px;margin:0 auto;
+    padding:0 28px;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .topbar-bar{
+    display:flex;align-items:center;gap:18px;width:100%;flex-wrap:wrap;
+    background:var(--white);
+    border-radius:999px;
+    padding:10px 14px 10px 14px;
+    box-shadow:0 1px 0 rgba(15,15,15,.04);
+  }
+  .logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--black)}
+  /* GoIT logo — SVG mark replicated from goit.global */
+  .logo-mark{display:inline-flex;align-items:center;height:38px}
+  .logo-mark svg{height:38px;width:auto;display:block}
+  .logo .divider{width:1px;height:24px;background:var(--cream-3)}
+  .logo .label{font-size:13px;color:var(--black);font-weight:700;letter-spacing:-.005em;line-height:1.2}
+  .logo .label small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+  .blocks-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .blocks-tabs a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 18px;border-radius:999px;
+    background:transparent;color:var(--black);
+    font-size:13.5px;font-weight:700;text-decoration:none;
+    border:1px solid transparent;
+    transition:all .15s;
+  }
+  .blocks-tabs a:hover{background:var(--cream)}
+  .blocks-tabs a.on{
+    background:var(--black);color:var(--white);
+  }
+  .blocks-tabs a .dot{width:7px;height:7px;border-radius:99px;background:currentColor;opacity:.4}
+  .blocks-tabs a.on .dot{opacity:1;background:var(--orange)}
+
+  /* LAYOUT */
+  .shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:36px;padding:0 28px}
+  /* SIDEBAR */
+  aside.side{
+    position:sticky;top:78px;align-self:start;
+    height:calc(100vh - 90px);overflow-y:auto;
+    padding:28px 0 40px;
+  }
+  .side-card{
+    background:var(--white);border:1px solid var(--border);
+    border-radius:20px;padding:20px 18px;
+  }
+  .side-card .kicker{
+    font-size:10.5px;letter-spacing:.18em;color:var(--orange-2);
+    font-weight:800;text-transform:uppercase;margin-bottom:6px
+  }
+  .side-card h3{margin:0 0 14px;font-size:18px;color:var(--black);line-height:1.2;font-weight:800;letter-spacing:-.025em}
+  .side-nav a{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:10px 14px;border-radius:99px;
+    color:var(--grey-700);text-decoration:none;font-size:13.5px;line-height:1.4;
+    margin:3px 0;transition:all .15s;
+    border:1px solid transparent;font-weight:600;
+  }
+  .side-nav a:hover{background:var(--cream);color:var(--black)}
+  .side-nav a.active{
+    background:var(--black);color:var(--white);
+    font-weight:700;
+  }
+  .side-nav a.active .num{color:var(--orange);opacity:1}
+  .side-nav .num{flex:0 0 24px;font-weight:800;opacity:.6;font-variant-numeric:tabular-nums;color:var(--black)}
+  .progress-card{margin-top:14px;padding:16px 20px}
+  .progress-card .label{font-size:11px;color:var(--muted);font-weight:700;
+                        display:flex;justify-content:space-between;margin-bottom:8px;
+                        letter-spacing:.08em;text-transform:uppercase}
+  .progress-card .bar{height:6px;background:var(--cream);border-radius:99px;overflow:hidden}
+  .progress-card .fill{height:100%;width:0;
+                       background:var(--orange);
+                       transition:width .3s}
+
+  /* MAIN */
+  main.content{padding:36px 0 80px;min-width:0}
+
+  /* HOME / LANDING */
+  .home-hero{padding:18px 0 8px;position:relative}
+  .home-tag{font-size:12px;letter-spacing:.2em;color:var(--orange-2);
+            font-weight:800;text-transform:uppercase;margin-bottom:14px;
+            display:inline-flex;align-items:center;gap:8px}
+  .home-tag::before{content:"";width:24px;height:2px;background:var(--orange);display:inline-block}
+  .home-title{font-size:68px;line-height:.98;font-weight:800;color:var(--black);
+              margin:0;letter-spacing:-.04em}
+  .home-title .accent{color:var(--black);position:relative;display:inline-block}
+  .home-title .accent::after{
+    content:"";position:absolute;left:-2px;right:-2px;bottom:.06em;height:.32em;
+    background:var(--orange);z-index:-1;
+  }
+  .home-sub{color:var(--grey-700);margin-top:22px;font-size:18px;max-width:64ch;line-height:1.55}
+
+  /* Pixel decorations like on goit.global */
+  .pixel-deco{position:absolute;pointer-events:none;font-family:"Roboto Mono",monospace;font-size:10px;line-height:.95;color:var(--orange-soft);white-space:pre;letter-spacing:0;opacity:.85}
+
+  .blocks-grid{margin:48px 0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .block-card{
+    position:relative;
+    background:var(--white);border:1px solid var(--border);
+    border-radius:24px;padding:32px 28px 24px;
+    text-decoration:none;color:inherit;
+    transition:all .2s;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    min-height:240px;
+  }
+  .block-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 40px -22px rgba(15,15,15,.18);
+  }
+  .block-card .num{
+    font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--grey-500);
+    font-weight:600;margin-bottom:14px;letter-spacing:.06em;text-transform:uppercase
+  }
+  .block-card h4{margin:0 0 14px;font-size:28px;font-weight:800;line-height:1.05;color:var(--black);letter-spacing:-.035em}
+  .block-card p{margin:0 0 22px;color:var(--grey-700);font-size:14.5px;line-height:1.55;flex:1}
+  .block-card .meta{display:flex;justify-content:space-between;align-items:center;
+                    font-size:13px;color:var(--black);font-weight:700;margin-top:auto}
+  .block-card .meta .pill{
+    background:var(--cream);color:var(--black);
+    padding:7px 14px;border-radius:99px;font-weight:700;font-size:12.5px;
+  }
+  .block-card .meta .arrow{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--black);color:var(--white);
+    display:grid;place-items:center;font-weight:800;font-size:18px;
+    transition:transform .2s,background .2s;
+  }
+  .block-card:hover .meta .arrow{transform:translateX(4px) rotate(-25deg);background:var(--orange);color:var(--black)}
+
+  /* Big orange CTA banner like on goit.global */
+  .cta-banner{
+    background:var(--orange);
+    border-radius:24px;
+    padding:36px 40px;
+    margin:32px 0 8px;
+    color:var(--black);
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .cta-banner::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(var(--orange-soft) 1px,transparent 1px),
+      linear-gradient(90deg,var(--orange-soft) 1px,transparent 1px);
+    background-size:14px 14px;
+    background-position:right 30px top 30px;
+    -webkit-mask:radial-gradient(circle at 90% 50%, #000 0, #000 35%, transparent 70%);
+            mask:radial-gradient(circle at 90% 50%, #000 0, #000 35%, transparent 70%);
+    opacity:.55;pointer-events:none;
+  }
+  .cta-banner .ctitle{font-size:13px;font-weight:700;margin-bottom:6px;position:relative;z-index:1}
+  .cta-banner h3{margin:0;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1;position:relative;z-index:1;max-width:520px}
+  .cta-banner .csub{margin:8px 0 0;font-size:14.5px;color:var(--black);max-width:520px;position:relative;z-index:1;line-height:1.5}
+  .cta-banner .ctaspace{flex:1}
+
+  .home-legend{
+    background:var(--black);
+    color:var(--white);
+    border-radius:24px;
+    padding:36px 36px;margin:24px 0 8px;
+  }
+  .home-legend h2{margin:0 0 4px;font-size:22px;color:var(--white);font-weight:800;letter-spacing:-.025em}
+  .home-legend .muted{margin:0 0 22px;color:var(--grey-300);font-size:14px}
+  .home-legend ul{list-style:none;padding:0;margin:0;display:grid;
+                  grid-template-columns:1fr 1fr;gap:14px 32px}
+  .home-legend li{font-size:14px;display:flex;gap:12px;align-items:flex-start;line-height:1.5;color:#E5E5E5}
+  .home-legend .mark{flex:0 0 24px;height:24px;display:grid;place-items:center;border-radius:6px;
+                     font-size:13px;font-weight:800;color:var(--black)}
+  .home-legend .lbl{font-weight:800;letter-spacing:.04em;font-size:13px;color:var(--white)}
+  .m-error{background:#FF7B5C}
+  .m-why{background:#CFCFCF}
+  .m-how{background:var(--orange)}
+  .m-ex{background:#9C9C9C}
+  .m-warn{background:#FFC94D}
+  .m-tip{background:var(--orange-soft)}
+
+  /* BLOCK COVER */
+  .cover-tag{font-size:11.5px;letter-spacing:.2em;color:var(--orange-2);
+             font-weight:800;text-transform:uppercase;margin-bottom:10px;
+             display:inline-flex;align-items:center;gap:8px}
+  .cover-tag::before{content:"";width:24px;height:2px;background:var(--orange);display:inline-block}
+  .cover-title{font-size:60px;line-height:.98;font-weight:800;color:var(--black);
+               margin:6px 0 0;letter-spacing:-.04em}
+  .cover-title .accent{color:var(--black);position:relative;display:inline-block}
+  .cover-title .accent::after{
+    content:"";position:absolute;left:-2px;right:-2px;bottom:.06em;height:.32em;
+    background:var(--orange);z-index:-1;
+  }
+  .cover-sub{color:var(--grey-700);margin-top:20px;font-size:17px;max-width:64ch}
+
+  /* MODULE */
+  .module{margin:48px 0 0}
+  .module-banner{
+    background:var(--black);
+    color:var(--white);padding:34px 38px;border-radius:24px;
+    position:relative;overflow:hidden;
+  }
+  .module-banner::before{
+    content:"";position:absolute;right:30px;top:30px;width:80px;height:80px;
+    background-image:
+      linear-gradient(rgba(248,149,87,.65) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(248,149,87,.65) 1px,transparent 1px);
+    background-size:10px 10px;
+    opacity:.7;pointer-events:none;
+    -webkit-mask:radial-gradient(circle at center,#000 0,#000 60%,transparent 100%);
+            mask:radial-gradient(circle at center,#000 0,#000 60%,transparent 100%);
+  }
+  .module-banner::after{
+    content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;
+    background:var(--orange);
+    opacity:.18;border-radius:50%;
+  }
+  .module-banner .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;letter-spacing:.2em;color:var(--black);
+    font-weight:800;text-transform:uppercase;
+    background:var(--orange);padding:7px 16px;border-radius:99px;
+  }
+  .module-banner h2{margin:18px 0 6px;font-size:32px;line-height:1.05;color:var(--white);
+                    font-weight:800;letter-spacing:-.035em;position:relative}
+  .module-banner .desc{color:#CFCFCF;font-size:15.5px;margin:0;line-height:1.55;position:relative}
+
+  /* TIP */
+  .tip{margin-top:32px}
+  .tip h3{
+    display:flex;align-items:baseline;gap:14px;
+    font-size:22px;color:var(--black);
+    border-bottom:2px solid var(--black);
+    padding:0 0 12px;margin:0 0 18px;
+    font-weight:800;line-height:1.25;letter-spacing:-.025em;
+  }
+  .tip h3 .num{
+    color:var(--orange-2);font-weight:800;font-size:22px;
+    flex:0 0 auto;font-family:"Roboto Mono",monospace;
+  }
+
+  /* CALLOUTS */
+  .callout{
+    border-left:4px solid;
+    padding:14px 18px;border-radius:10px;
+    margin:10px 0;font-size:15.5px;line-height:1.6;
+    background:#fff;
+  }
+  .callout .head{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:.08em;font-weight:800;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .callout .head .mark{
+    width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
+    color:#fff;font-size:12px;font-weight:800;
+  }
+  .callout p{margin:0}
+  .callout p+p{margin-top:8px}
+  .callout b{color:var(--black)}
+  .c-error{background:var(--error-bg);border-color:var(--error-bd)}
+  .c-error .head{color:var(--error-tx)}
+  .c-error .mark{background:var(--error-bd)}
+  .c-why{background:var(--why-bg);border-color:var(--why-bd)}
+  .c-why .head{color:var(--why-tx)}
+  .c-why .mark{background:var(--why-bd)}
+  .c-how{background:var(--how-bg);border-color:var(--how-bd)}
+  .c-how .head{color:var(--how-tx)}
+  .c-how .mark{background:var(--how-bd);color:#fff}
+  .c-ex{background:var(--ex-bg);border-color:var(--ex-bd)}
+  .c-ex .head{color:var(--ex-tx)}
+  .c-ex .mark{background:var(--ex-bd)}
+  .c-warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+  .c-warn .head{color:var(--warn-tx)}
+  .c-warn .mark{background:var(--warn-bd)}
+  .c-tip{background:var(--tip-bg);border-color:var(--tip-bd)}
+  .c-tip .head{color:var(--tip-tx)}
+  .c-tip .mark{background:var(--tip-bd)}
+
+  ul.bullets{margin:6px 0 12px;padding-left:22px}
+  ul.bullets li{margin:4px 0}
+  ul.bullets li::marker{color:var(--orange-2)}
+  .small-h{font-size:12px;color:var(--orange-2);font-weight:800;
+           margin:18px 0 8px;letter-spacing:.1em;text-transform:uppercase}
+  .branch{padding:4px 0 4px 26px;font-style:italic;color:var(--grey-700);
+          font-size:14.5px}
+  .branch b{color:var(--orange-2);font-style:normal}
+
+  /* CHECKLIST */
+  .checklist{margin:18px 0 24px;padding:24px 26px;background:var(--white);
+             border-radius:20px;border:1px solid var(--border)}
+  .checklist h4{margin:0 0 12px;color:var(--black);font-size:16px;
+                font-weight:800;letter-spacing:-.025em}
+  .checklist label{display:flex;gap:12px;align-items:flex-start;
+                   padding:10px 0;cursor:pointer;font-size:14.5px;
+                   border-bottom:1px dashed var(--border)}
+  .checklist label:last-child{border-bottom:none}
+  .checklist input{margin-top:5px;width:18px;height:18px;cursor:pointer;
+                   accent-color:var(--orange-2)}
+  .checklist .q{font-weight:700;color:var(--black)}
+  .checklist .a{color:var(--muted);font-style:italic;margin-top:2px;display:block}
+  .checklist label.done .q,.checklist label.done .a{
+    text-decoration:line-through;opacity:.55}
+
+  .formula{font-family:"Roboto Mono",monospace;
+           font-size:14.5px;font-weight:600;color:var(--orange-2)}
+
+  hr.fade{border:none;height:1px;background:var(--border);margin:48px 0 0}
+  .footer{margin:30px 0 30px;color:var(--grey-700);font-size:14.5px;line-height:1.6}
+  .footer b{color:var(--orange-2)}
+
+  .view{display:none}
+  .view.on{display:block}
+
+  /* MOBILE */
+  @media (max-width:1024px){
+    .blocks-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:880px){
+    .shell{grid-template-columns:1fr;gap:0;padding:0 18px}
+    aside.side{position:static;height:auto;padding:14px 0;overflow:visible}
+    .blocks-tabs{margin-left:0;width:100%;justify-content:flex-start}
+    .topbar-inner{padding:14px 18px}
+    .logo .divider,.logo .label{display:none}
+    main.content{padding:18px 0 60px}
+    .home-title{font-size:38px}
+    .cover-title{font-size:32px}
+    .module-banner{padding:24px 22px}
+    .module-banner h2{font-size:24px}
+    .blocks-grid{grid-template-columns:1fr}
+    .home-legend ul{grid-template-columns:1fr}
+  }
+  @media print{
+    .topbar,aside.side{display:none}
+    .shell{grid-template-columns:1fr;padding:0}
+    main.content{padding:14px;max-width:none}
+    .module-banner,.tip,.callout,.checklist{break-inside:avoid}
+    body{background:#fff}
+    .view{display:block !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-bar">
+      <a href="#home" class="logo" data-route="home">
+        <span class="label">Рекомендації ментора<small>AI Automator</small></span>
+      </a>
+      <nav class="blocks-tabs" id="blocks-tabs">
+        <a href="#prompt" data-route="prompt"><span class="dot"></span>Prompt Engineering</a>
+        <a href="#marketing" data-route="marketing"><span class="dot"></span>Marketing Automation</a>
+        <a href="#sales" data-route="sales"><span class="dot"></span>Sales Automation</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+<!-- ========== SIDEBAR ========== -->
+<aside class="side">
+  <!-- HOME SIDEBAR -->
+  <div class="side-pane" data-pane="home">
+    <div class="side-card">
+      <div class="kicker">Огляд</div>
+      <h3>Оберіть блок</h3>
+      <nav class="side-nav">
+        <a href="#prompt"><span class="num">01</span><span>Prompt Engineering & AI Agents</span></a>
+        <a href="#marketing"><span class="num">02</span><span>Marketing Automation</span></a>
+        <a href="#sales"><span class="num">03</span><span>Sales Automation</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PROMPT SIDEBAR -->
+  <div class="side-pane" data-pane="prompt" style="display:none">
+    <div class="side-card">
+      <div class="kicker">Блок 01</div>
+      <h3>Prompt Engineering & AI Agents</h3>
+      <nav class="side-nav" data-block="prompt">
+        <a href="#prompt/m1"><span class="num">1.</span><span>Основи промпт-інжинірингу</span></a>
+        <a href="#prompt/m2"><span class="num">2.</span><span>LLM, моделі та кастомізація</span></a>
+        <a href="#prompt/m3"><span class="num">3.</span><span>n8n для автоматизації</span></a>
+        <a href="#prompt/m4"><span class="num">4.</span><span>Google-сервіси</span></a>
+        <a href="#prompt/m5"><span class="num">5.</span><span>Drive, Data Tables, Звук</span></a>
+        <a href="#prompt/m6"><span class="num">6.</span><span>Фінальний проєкт</span></a>
+      </nav>
+    </div>
+    <div class="side-card progress-card">
+      <div class="label"><span>Прогрес читання</span><span data-progress-pct="prompt">0%</span></div>
+      <div class="bar"><div class="fill" data-progress="prompt"></div></div>
+    </div>
+  </div>
+
+  <!-- MARKETING SIDEBAR -->
+  <div class="side-pane" data-pane="marketing" style="display:none">
+    <div class="side-card">
+      <div class="kicker">Блок 02</div>
+      <h3>Marketing Automation</h3>
+      <nav class="side-nav" data-block="marketing">
+        <a href="#marketing/m1"><span class="num">1.</span><span>AI-контент у Telegram</span></a>
+        <a href="#marketing/m2"><span class="num">2.</span><span>Лендинг і збір лідів</span></a>
+        <a href="#marketing/m3"><span class="num">3.</span><span>Zoho CRM: підключення</span></a>
+        <a href="#marketing/m4"><span class="num">4.</span><span>Email-воронка та Klaviyo</span></a>
+        <a href="#marketing/m5"><span class="num">5.</span><span>Фінальний проєкт</span></a>
+      </nav>
+    </div>
+    <div class="side-card progress-card">
+      <div class="label"><span>Прогрес читання</span><span data-progress-pct="marketing">0%</span></div>
+      <div class="bar"><div class="fill" data-progress="marketing"></div></div>
+    </div>
+  </div>
+
+  <!-- SALES SIDEBAR -->
+  <div class="side-pane" data-pane="sales" style="display:none">
+    <div class="side-card">
+      <div class="kicker">Блок 03</div>
+      <h3>Sales Automation</h3>
+      <nav class="side-nav" data-block="sales">
+        <a href="#sales/m1"><span class="num">1.</span><span>AI Sales Qualification</span></a>
+        <a href="#sales/m2"><span class="num">2.</span><span>AI Follow-Up Engine</span></a>
+        <a href="#sales/m3"><span class="num">3.</span><span>AI Sales Assistant</span></a>
+        <a href="#sales/m4"><span class="num">4.</span><span>Голосовий агент (бонус)</span></a>
+        <a href="#sales/m5"><span class="num">5.</span><span>Звітність</span></a>
+      </nav>
+    </div>
+    <div class="side-card progress-card">
+      <div class="label"><span>Прогрес читання</span><span data-progress-pct="sales">0%</span></div>
+      <div class="bar"><div class="fill" data-progress="sales"></div></div>
+    </div>
+  </div>
+</aside>
+
+<main class="content">
+
+<!-- ====================== HOME VIEW ====================== -->
+<section class="view on" data-view="home">
+  <div class="home-hero">
+    <div class="home-tag">Mentor Recommendations</div>
+    <h1 class="home-title">Технічні рекомендації<br><span class="accent">від ментора курсу</span></h1>
+    <p class="home-sub">Шпаргалка по 3 блоках курсу AI Automator. Відкривайте перед кожним ДЗ — і виконуйте завдання як архітектор системи, а не як замовник.</p>
+  </div>
+
+  <div class="blocks-grid">
+    <a href="#prompt" class="block-card">
+      <div class="num">// Блок 01</div>
+      <h4>Prompt Engineering & AI Agents</h4>
+      <p>Що варто запам’ятати, на чому зазвичай спотикаються і як виконувати ДЗ як архітектор. 6 модулів — від основ промптингу до фінального AI-агента.</p>
+      <div class="meta"><span class="pill">6 модулів</span><span class="arrow">↗</span></div>
+    </a>
+    <a href="#marketing" class="block-card">
+      <div class="num">// Блок 02</div>
+      <h4>Marketing Automation</h4>
+      <p>Архітектура Telegram-ботів, лендингів і email-воронок. Klaviyo, Zoho CRM, AI-кваліфікація лідів. 5 модулів практики.</p>
+      <div class="meta"><span class="pill">5 модулів</span><span class="arrow">↗</span></div>
+    </a>
+    <a href="#sales" class="block-card">
+      <div class="num">// Блок 03</div>
+      <h4>Sales Automation</h4>
+      <p>AI Sales Qualification, follow-up каскади, голосові агенти, звітність для CEO. 5 модулів про те, як автоматизувати реальний відділ продажів.</p>
+      <div class="meta"><span class="pill">5 модулів</span><span class="arrow">↗</span></div>
+    </a>
+  </div>
+
+  <section class="cta-banner">
+    <div>
+      <div class="ctitle">Перед кожним ДЗ</div>
+      <h3>Відкрий потрібний блок і пройдись по чек-листу</h3>
+      <p class="csub">Шукай помилки, яких варто уникати, та конкретні приклади «як правильно». Кожна порада — це досвід ментора.</p>
+    </div>
+    <div class="ctaspace"></div>
+  </section>
+
+  <section class="home-legend">
+    <h2>Як користуватись цим документом</h2>
+    <p class="muted">Кожна порада подана за єдиною схемою. Шукайте однакові маркери в усіх трьох блоках:</p>
+    <ul>
+      <li><span class="mark m-error">●</span><span><span class="lbl">ТИПОВА ПОМИЛКА</span> — те, через що зазвичай ДЗ повертають на доопрацювання.</span></li>
+      <li><span class="mark m-why">◆</span><span><span class="lbl">ЧОМУ ЦЕ ВАЖЛИВО</span> — пояснення з боку архітектора рішення.</span></li>
+      <li><span class="mark m-how">✓</span><span><span class="lbl">ЯК ПРАВИЛЬНО</span> — конкретні кроки та налаштування.</span></li>
+      <li><span class="mark m-ex">▶</span><span><span class="lbl">ПРИКЛАД</span> — короткий приклад або шаблон.</span></li>
+      <li><span class="mark m-warn">⚠</span><span><span class="lbl">УВАГА</span> — критичний момент, без якого ДЗ не зарахують.</span></li>
+      <li><span class="mark m-tip">★</span><span><span class="lbl">ЛАЙФХАК</span> — професійні прийоми, що економлять час або гроші.</span></li>
+    </ul>
+  </section>
+</section>
+
+<!-- ====================== PROMPT ENGINEERING VIEW ====================== -->
+<section class="view" data-view="prompt">
+  <div class="cover-tag">Блок 01 · Рекомендації ментора</div>
+  <h1 class="cover-title">Prompt Engineering<br><span class="accent">& AI Agents</span></h1>
+  <p class="cover-sub">Що варто запам’ятати, на чому зазвичай спотикаються і як виконувати ДЗ як архітектор, а не як замовник.</p>
+
+  <!-- MODULE 1 -->
+  <section class="module" id="prompt-m1">
+    <div class="module-banner">
+      <div class="tag">Модуль 1</div>
+      <h2>Основи промпт-інжинірингу</h2>
+      <p class="desc">П’ять правил, що перетворюють чат на інструмент, якому можна довіряти.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Few-Shot: помилка «Zero-Shot»</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Найчастіша помилка — написати довгу інструкцію, але не дати жодного прикладу. Це називається <b>Zero-Shot</b>. Приклади («shots») — це рейки для поїзда. Без них ШІ може поїхати в будь-який бік.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Надавайте мінімум <b>3 пари</b> «Текст відгуку — Готовий JSON». Покажіть моделі, як ви хочете, щоб вона обробляла «сірі зони» (наприклад, який відгук є позитивний, який негативний, а який нейтральний). Саме завдяки цим прикладам модель буде розуміти, як класифікувати реальні дані, які ви будете надавати. Ваші приклади — це еталон якості.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Chain of Thought (CoT): не просто фраза, а алгоритм</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Багато хто просто додає в кінці «думай крок за кроком». Це працює, але це не зовсім коректно. CoT потрібен для складних розрахунків або бізнес-логіки.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Задавайте моделі <b>структуру міркувань</b>. Наприклад: <i>«Спочатку виділи всі змінні витрати, потім проаналізуй постійні, розрахуй точку беззбитковості й тільки після цього дай фінальну рекомендацію»</i>. Чим чіткіший шлях, тим менша ймовірність помилки в цифрах.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> DALL·E: станьте режисером, а не замовником</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>«Будинок у горах» — це опис для дитячого малюнка. Професійний промпт для генерації зображень має технічні параметри.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Модель має «розуміти» не тільки <b>що</b> малювати, а й <b>як</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Використовуйте формулу: <b>Об’єкт + Дія + Оточення + Освітлення + Ракурс камери + Стиль</b>.</p>
+      </div>
+      <div class="callout c-ex"><div class="head"><span class="mark">▶</span>Приклад</div>
+        <p>Замість <i>«дівчина на пляжі»</i> напишіть: <i>«Портрет дівчини на фоні океану, золота година (освітлення), зйомка на 35mm lens (ракурс), фотореалізм, висока деталізація шкіри»</i>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Deep Research: це технічне завдання (ТЗ)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Якщо ви просто пишете тему, ШІ видасть вам статтю з Вікіпедії. Це не дослідження.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Deep Research має давати <b>прикладну цінність для бізнесу</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада — завжди вказуйте</div>
+        <ul class="bullets">
+          <li><b>Ціль:</b> для чого це дослідження?</li>
+          <li><b>Структуру:</b> вам потрібна таблиця, список чи звіт?</li>
+          <li><b>Вимоги до даних:</b> актуальність (наприклад, 2025–2026 роки), конкретні ринки (Україна, ЄС).</li>
+          <li><b>Джерела:</b> просіть посилатися на звіти консалтингових компаній чи офіційну документацію.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> Ітераційне покращення: шлях до «Мастер-промпту»</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Не просто «переписуйтеся» з ботом. Мета цього кроку — еволюція. В автоматизації ми не можемо щоразу щось уточнювати. Нам потрібен один ідеальний інструмент.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Кожна ваша ітерація має додавати <b>Роль, Обмеження або Контекст</b>. А в кінці обов’язково зробіть фінальний крок: <i>«На основі всього вищесказаного, сформулюй один ідеальний промпт, який я зможу використовувати в майбутньому»</i>. Це і є ваш результат.</p>
+      </div>
+    </div>
+
+    <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Головне правило автоматизації — чистота форматів</div>
+      <p>Якщо ви готуєте промпт для обробки даних — обирайте <b>ОДИН</b> формат виводу. Або JSON, або Markdown. Якщо ви просите обидва одночасно, будь-який автоматичний скрипт (парсер) зламається.</p>
+      <p>Якщо дані йдуть у таблицю чи код — тільки <b>JSON</b>. Якщо для читання людиною — <b>Markdown</b>.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 2 -->
+  <section class="module" id="prompt-m2">
+    <div class="module-banner">
+      <div class="tag">Модуль 2</div>
+      <h2>Як працює LLM, види моделей та їх кастомізація</h2>
+      <p class="desc">Параметри, токени, RAG — важелі управління «розумом» моделі.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Temperature та Top-p: чому 2.0 — це смерть логіки</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Що це насправді робить</div>
+        <p>Ви побачили «сміття» при високій температурі, але не зрозуміли чому. Temperature розширює коло вибору токенів. При <b>T = 0</b> модель завжди бере найбільш імовірне слово. При <b>T = 2</b> — навіть те, що майже не має сенсу.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Практична порада</div>
+        <p>В автоматизації бізнесу (облік, юриспруденція) ми використовуємо <b>T = 0 або 0.2</b>. Висока температура — лише для ідей та «мозкового штурму».</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Економіка токенів: чому українська мова «дорожча»</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому так</div>
+        <p>Це не дискримінація, а математика кодування (<i>UTF-8 vs Byte-pair encoding</i>). В англійській <b>1 токен ≈ 4 символи</b>. В українській — <b>1 токен ≈ 1.5–2 символи</b>.</p>
+      </div>
+      <div class="small-h">Наслідки для архітектора</div>
+      <ul class="bullets">
+        <li><b>Бюджет:</b> проєкт українською мовою коштуватиме у <b>1.5–2 рази дорожче</b> в експлуатації.</li>
+        <li><b>Пам’ять:</b> контекстне вікно (наприклад, 128k токенів) закінчиться в українського бота швидше.</li>
+      </ul>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Лайфхак</div>
+        <p>Пишіть системні інструкції (System Prompt) англійською — модель їх зрозуміє, а ви зекономите <b>40 % вартості</b> кожного запиту.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> API-запити: дрібниці, що зупиняють бізнес</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>JSON — мова, яка не пробачає помилок</div>
+        <p>Один зайвий символ — і ваш сценарій у n8n чи Make «впаде».</p>
+      </div>
+      <div class="small-h">Типові факапи з ДЗ</div>
+      <ul class="bullets">
+        <li>Використання <b>( )</b> замість <b>{ }</b>.</li>
+        <li>Спроба поставити <b>temperature = 3.7</b> (ліміт OpenAI — від 0 до 2).</li>
+        <li>Використання неіснуючих моделей.</li>
+      </ul>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Завжди використовуйте валідатори JSON перед тим, як вставляти код у n8n чи Make. Один зайвий символ у <b>role: "system"</b> — і весь ваш сценарій «впаде».</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Галюцинації та RAG: як не дати ШІ себе обдурити</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Корінь проблеми</div>
+        <p>ШІ не вміє казати «я не знаю», якщо йому не заборонити. Моделі схильні до <b>Sycophancy</b> (навіювання). Якщо ви впевнено запитаєте про гелікоптер на молоці, стара модель може почати вигадувати його історію.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рішення — RAG (Retrieval-Augmented Generation)</div>
+        <p>Ми даємо моделі «підручник» (контекст) і кажемо: «Відповідай <b>ТІЛЬКИ</b> на основі цього». Ви побачили, що модель знає застарілу інфу. Тільки додавання свіжого тексту з офіційного джерела робить ШІ придатним для роботи з актуальними даними.</p>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <h4>Чек-лист самоперевірки</h4>
+      <label><input type="checkbox" data-cl="p2-1">
+        <span><span class="q">Чи маю я використовувати українську в System Prompt?</span>
+        <span class="a">→ Ні, краще англійську для економії.</span></span></label>
+      <label><input type="checkbox" data-cl="p2-2">
+        <span><span class="q">Яку температуру поставити для бота-консультанта в магазині?</span>
+        <span class="a">→ Низьку, 0.2–0.3, щоб не вигадував знижки.</span></span></label>
+      <label><input type="checkbox" data-cl="p2-3">
+        <span><span class="q">Що робити, якщо модель впевнено бреше про дату виходу закону?</span>
+        <span class="a">→ Додати текст закону в контекст через RAG.</span></span></label>
+      <label><input type="checkbox" data-cl="p2-4">
+        <span><span class="q">Чому запит у ReqBin повертає помилку, хоча текст правильний?</span>
+        <span class="a">→ Перевірити дужки, лапки та валідність назви моделі.</span></span></label>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Висновок</div>
+      <p>Ваша задача — не просто отримати відповідь від чату, а спроєктувати систему, яка буде <b>надійною, дешевою та точною</b>. Кожен токен і кожен параметр — це важіль управління цим «розумом». Використовуйте їх свідомо.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 3 -->
+  <section class="module" id="prompt-m3">
+    <div class="module-banner">
+      <div class="tag">Модуль 3</div>
+      <h2>n8n для автоматизації</h2>
+      <p class="desc">Архітектура бота: де AI потрібен, а де — лише марнує гроші.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Економіка токенів: табу на AI для /start</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Кожен запит до LLM коштує грошей. Користувач тисне <b>/start</b>, запит летить в AI, модель витрачає 100–200 токенів на промпт + генерацію, щоб просто сказати: <i>«Привіт, я бот-перекладач»</i>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Використовується вузол <b>Switch (або If)</b>. Він перевіряє: «Якщо повідомлення дорівнює <b>/start</b> — відправити заздалегідь написаний текст».</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Економія</div>
+        <p>Вартість цієї операції для бюджету клієнта — <b>0 гривень</b>. У масштабі 10 000 користувачів ви економите сотні доларів на порожньому місці.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Швидкість реакції (Latency)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Для користувача швидкість — це головний показник якості. AI Agent потребує часу на роздуми. Навіть найшвидші моделі мають затримку в 1–2 секунди. Це створює відчуття тугого бота.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p><b>Switch Node:</b> відповідь приходить миттєво (мілісекунди). Бот здається легким і професійним.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Гігієна «Контекстного вікна» (пам’ять)</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Найважливіший технічний момент</div>
+        <p>Це найважливіший технічний момент, який студенти часто упускають. Більшість агентів мають пам’ять (Simple Memory / Buffer Window). Якщо привітання пройшло через AI, воно потрапляє в історію діалогу. Коли користувач надішле наступне повідомлення (наприклад, реальний текст для перекладу), бот знову відправить в OpenAI історію, де буде це «Привіт».</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Висновок</div>
+        <p>Ви будете платити за це системне привітання <b>кожного разу</b>, поки воно не випаде з ліміту пам’яті. Це називається <b>«інфляція токенів»</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Клієнтоорієнтованість: вітальне повідомлення та інструкція</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Бот — це інтерфейс. Якщо користувач натиснув <b>/start</b> і нічого не зрозумів, ви програли.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Бот повинен миттєво представитися: <b>хто він, що робить і яку проблему вирішує</b>.</p>
+        <p><b>Інструкція (How-to-use):</b> не змушуйте користувача гадати. Напишіть приклад запиту: <i>«Просто напиши мені: "Переклади на італійську: Де тут найкраща кава?", і я все зроблю»</i>.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>В бізнесі це Onboarding</div>
+        <p>Високий рівень відмов (churn rate) часто стається саме через те, що бот «мовчить» або відповідає сухо.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> Психологія очікування: вузол Action: Typing</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Що відбувається без нього</div>
+        <p>AI-агенти працюють повільно. Поки модель думає (1–5 секунд), для користувача бот виглядає «мертвим» або завислим.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Перед вузлом AI Agent обов’язково додавайте вузол <b>Telegram → Sender Action → typing</b>. Користувач бачить статус «Бот друкує…». Це знімає тривожність, створює ілюзію живої розмови та підвищує лояльність до сервісу. Це дрібниця, яка відрізняє професійний софт від аматорської розробки.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">6.</span> Error Workflow: ваша страховка</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Реальність продакшну</div>
+        <p>У продакшені помилки стаються завжди: закінчилися гроші на балансі, впало API, Telegram заблокував запит.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Ваш сценарій повинен мати <b>Error Handler</b>. Користувач не має бачити нескінченне «очікування» або технічні помилки. Він має отримати ввічливе: <i>«Вибачте, я зараз відпочиваю, спробуйте за хвилину»</i>.</p>
+      </div>
+    </div>
+
+    <div class="small-h">Як це виглядає в архітектурі n8n</div>
+    <ul class="bullets">
+      <li><b>Тригер:</b> Telegram Trigger (On Message).</li>
+      <li><b>Вузол Switch:</b></li>
+    </ul>
+    <div class="branch"><b>→ Гілка 1:</b> <i>text дорівнює /start. Веде на вузол Telegram Send з готовим текстом «Привіт! Я твій перекладач…».</i></div>
+    <div class="branch"><b>→ Гілка 2:</b> <i>text НЕ дорівнює /start. Веде на AI Agent.</i></div>
+    <ul class="bullets">
+      <li><b>Результат:</b> AI включається в роботу тільки тоді, коли з’являється реальна інтелектуальна задача (аналіз мови, переклад).</li>
+    </ul>
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Мислення архітектора</div>
+      <p><i>Використовуйте AI тільки там, де без нього неможливо обійтися.</i></p>
+    </div>
+  </section>
+
+  <!-- MODULE 4 -->
+  <section class="module" id="prompt-m4">
+    <div class="module-banner">
+      <div class="tag">Модуль 4</div>
+      <h2>Автоматизація Google-сервісів</h2>
+      <p class="desc">Чисті дані, чистий JSON, чиста бізнес-логіка.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> «Гігієна» даних та іменування змінних</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Для людини <b>items</b> і <b>iteams</b> — це одне й те саме (просто одрук). Для системи це дві абсолютно різні сутності.</p>
+      </div>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Поширені помилки</div>
+        <p>Створюють змінну <b>isLead </b>(з пробілом у кінці) або пишуть з помилками, а потім витрачають години на пошук проблеми, бо наступний вузол «не бачить» даних.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>У n8n та програмуванні загалом немає дрібниць. Завжди перевіряйте ключі, які ви створюєте. Використовуйте зрозумілі назви: <b>is_lead, quantity, items</b>. Якщо ви просите AI знайти <b>item_list</b>, то і в Google Docs, і в таблиці ви маєте звертатися саме до <b>item_list</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Приборкання AI: вимагайте виключно чистий JSON</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Мовні моделі (LLM) люблять бути ввічливими. Якщо не задати жорсткі рамки, на ваш запит модель відповість: <i>«Звісно! Ось ваші дані: { … }»</i>. Цей вступний текст миттєво зламає ваш workflow, бо наступний вузол очікує код, а не текст.</p>
+      </div>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Поширені помилки</div>
+        <p>Писати промпт <i>«виведи дані в JSON»</i> і сподіватися на краще.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>У налаштуваннях AI-вузла (LangChain/OpenAI) завжди примусово вмикайте формат <b>json_object</b>. А в самому промпті давайте чітку структуру:</p>
+      </div>
+      <div class="callout c-ex"><div class="head"><span class="mark">▶</span>Шаблон промпту</div>
+        <p><i>Return ONLY valid JSON. No explanations, no markdown formatting. Schema: {"isLead": boolean, "items": []}.</i></p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Бізнес-логіка: математика — не для AI</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Ваше завдання — не просто знайти слова в тексті, а згенерувати комерційну пропозицію. Для цього треба порахувати ціну (кількість тортів × 1000).</p>
+      </div>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Поширена помилка</div>
+        <p>Просити AI самому помножити числа і видати фінальну суму. Це поганий підхід, бо AI може галюцинувати або помилитися в розрахунках при складніших прайсах.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>AI має робити те, що вміє найкраще — <b>читати та класифікувати текст</b> (витягнути число «2»). А от множити це число на 1000 повинен класичний системний вузол (наприклад, <b>Set або Code</b>).</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Бонус масштабованості</div>
+        <p>Якщо завтра ціна торта зміниться на 1500, ви просто зміните цифру у вузлі Set, а не будете переписувати AI-промпт.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Замкнений цикл продажів (UX клієнта)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Подумайте за клієнта</div>
+        <p>Уявіть себе на місці замовника. Ви написали в кондитерську на email. Де ви чекаєте відповідь? Правильно — у пошті.</p>
+      </div>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Поширена помилка</div>
+        <p>Налаштовувати повідомлення в Telegram для менеджера <i>(«Ура, новий лід!»)</i> і на цьому workflow закінчується. А клієнт сидить і чекає.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Сповіщення в Telegram — це чудово для внутрішньої команди. Але ваш workflow обов’язково має закінчуватися вузлом <b>Gmail</b>, який надсилає згенерований Google Doc клієнту. Причому використовуйте операцію <b>Reply, а не Send</b> — так ваша відповідь прикріпиться до попереднього листа клієнта у вигляді діалогу (треду). Це показник зрілої CRM-системи.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Резюме модуля</div>
+      <p>Не намагайтеся зробити роботу «для галочки». Кожен вузол у вашому ланцюжку має бути обґрунтованим. Протестуйте своє рішення: відправте собі тестовий лист (звичайний та спам) і перевірте, чи правильно відпрацює система. Успіхів!</p>
+    </div>
+  </section>
+
+  <!-- MODULE 5 -->
+  <section class="module" id="prompt-m5">
+    <div class="module-banner">
+      <div class="tag">Модуль 5</div>
+      <h2>Google Drive, Data Tables. Робота зі звуком</h2>
+      <p class="desc">Атомарні workflow, ID замість назв, описи як код.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Архітектурна модульність — правило 4-х Workflow</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Не намагайтеся запхати все в один сценарій. В індустрії цінується атомарність.</p>
+      </div>
+      <div class="small-h">Розкладка</div>
+      <ul class="bullets">
+        <li><b>1 Main Agent:</b> «Мозок», який приймає рішення.</li>
+        <li><b>3 окремі Tools:</b> спеціалізовані інструменти <b>(Add, List, Complete)</b>.</li>
+      </ul>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Чому саме так</div>
+        <p>Якщо завтра клієнт захоче замінити Data Tables на Notion або Google Sheets, ви заміните лише один інструмент, не чіпаючи логіку агента.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Забудьте про пошук за назвою — використовуйте ID</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Найпоширеніша помилка</div>
+        <p>Якщо ви скажете агенту <i>«закрий задачу Купити молоко»</i>, а в базі їх дві — він або закриє не ту, або зламається.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Експертний підхід</div>
+        <p>Навчіть агента в системному промпті <b>двоетапній логіці</b>: спочатку викликати <b>list_tasks</b>, побачити список із ID, а потім передавати цей числовий ідентифікатор в інструмент завершення. Тільки ID гарантує точність у реальному бізнесі.</p>
+      </div>
+      <div class="callout c-ex"><div class="head"><span class="mark">▶</span>Як це звучить у діалозі</div>
+        <p>У системі є завдання з двома однаковими назвами → система має показати користувачу ці два завдання, запитати яке саме з них помітити як виконане → користувач відповідає → ми системі передаємо <b>ID саме цієї таски</b> і система відмічає як виконано.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Описи інструментів (Description) — це код</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Що це насправді</div>
+        <p>Поле Description у вузлі Workflow Tool — це <b>не коментар для вас</b>, це інструкція для LLM. Якщо опис розмитий, агент буде плутати інструменти або передавати некоректні дані.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Шаблон опису</div>
+        <p>Пишіть там чітко: <i>«Використовуй цей інструмент, коли користувач хоче… Очікує на вхід параметр ID (число)…»</i>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Вираз $first проти $item</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Правило</div>
+        <p>При фільтрації або пошуку в інструментах пам’ятайте: коли ви порівнюєте список із бази з <b>одним</b> запитом від користувача, використовуйте <b>$first</b> у виразах. Це «заякорить» вхідні дані та не дасть циклу зламатися.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Ваша мета</div>
+      <p><i>Створити систему, яка працює без збоїв навіть тоді, коли в базі 100 задач із подібними назвами. Працюйте як архітектори. Успіхів!</i></p>
+    </div>
+  </section>
+
+  <!-- MODULE 6 -->
+  <section class="module" id="prompt-m6">
+    <div class="module-banner">
+      <div class="tag">Модуль 6</div>
+      <h2>Фінальний проєкт: від бізнес-задачі до робочого AI-агента</h2>
+      <p class="desc">Polling, транскрибація, класифікація, аналітика — все в одному.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Рівень збору даних (Polling Logic)</h3>
+      <p>Workflow запускається за розкладом <b>(Cron: */2 * * * *)</b>.</p>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Критична помилка</div>
+        <p>Викачувати <b>всі рядки</b> з таблиці.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Правильна логіка</div>
+        <p>Використовуйте фільтр у модулі Google Sheets (наприклад, <b>Search Rows</b>), щоб вибирати лише ті записи, де колонку <b>Статус</b> не заповнено.</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Захист від подвійної обробки</div>
+        <p>Одразу після отримання даних першим кроком у workflow (або паралельно з обробкою) змініть статус у Google Sheets на <b>Processing або Done</b>. Це гарантує, що наступний запуск через 2 хвилини не візьме той самий дзвінок у роботу.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Рівень обробки (Transcription & LLM)</h3>
+      <div class="small-h">Транскрибація</div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Ви передаєте пряме посилання на файл в AssemblyAI. Пам’ятайте про асинхронність: якщо файл великий, API може повернути <b>ID задачі</b>, а не текст. Для навчання в межах ДЗ достатньо переконатися, що ви отримуєте фінальний текст.</p>
+      </div>
+      <div class="small-h">Класифікація (LLM)</div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Жорсткі рамки</div>
+        <p>Ваш промпт має бути жорстким. Вимагайте від AI повертати результат у форматі, зручному для парсингу (наприклад, <b>JSON</b>).</p>
+      </div>
+      <ul class="bullets">
+        <li><b>Тональність:</b> тільки три варіанти — <b>positive, negative, neutral</b>.</li>
+        <li><b>Категорія:</b> дозвольте AI виділити суть (якість торта, доставка), але додайте категорію <b>«інше»</b> для нетипових запитів.</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Рівень збереження (Data Storage)</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Дані про результат обробки йдуть в <b>окрему</b> таблицю (Data Table).</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому так</div>
+        <p>Вхідна таблиця — це ваша <b>«черга повідомлень»</b>. Вихідна таблиця — це ваша <b>«база знань»</b>. Це дозволяє зберігати історію, навіть якщо вхідну чергу буде очищено.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Рівень аналітики (AI Agent & Tools)</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Тут перевіряється ваша майстерність</div>
+        <p>Це найскладніша частина, де перевіряється ваша майстерність у Prompt Engineering.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Роль агента</div>
+        <p>У System Message обов’язково вкажіть поточну дату: <b>Today is {{ $now }}</b>. Без цього Агент не зможе зрозуміти, що таке «минулий місяць».</p>
+      </div>
+      <div class="small-h">Логіка виклику інструменту</div>
+      <ul class="bullets">
+        <li><b>Користувач пише:</b> <i>«Дай статистику за минулий тиждень»</i>.</li>
+        <li><b>Агент обчислює:</b> <i>«Сьогодні 30.04.2026, отже тиждень тому — це з 20.04 по 26.04»</i>.</li>
+        <li><b>Агент викликає:</b> <b>Get call stats</b> з параметрами <b>startDate: 2026-04-20, endDate: 2026-04-26</b>.</li>
+      </ul>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Інструмент (Workflow-функція)</div>
+        <p>Він не повинен просто виплеснути список усіх дзвінків. Він має <b>виконати агрегацію даних</b>. На виході Агент отримує лише цифри.</p>
+      </div>
+    </div>
+
+    <div class="small-h">Математична точність аналітики</div>
+    <p style="margin:0 0 8px">Інструмент має рахувати відсоток негативних відгуків за формулою:</p>
+    <div class="callout c-ex"><div class="head"><span class="mark">▶</span>Формула</div>
+      <p class="formula">negativeCallPercent = (negativeCalls / totalCalls) × 100 %</p>
+    </div>
+    <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Захист від ділення на нуль</div>
+      <p>Якщо <b>totalCalls = 0</b>, workflow має повертати <b>0</b>, щоб уникнути помилки ділення на нуль.</p>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Фінальна настанова</div>
+      <p><i>Будуйте архітектуру так, ніби від цього залежить бюджет великої компанії. Успіхів!</i></p>
+    </div>
+  </section>
+
+  <hr class="fade">
+  <div class="footer">
+    Збережіть цей блок як шпаргалку та відкривайте відповідний модуль перед кожним ДЗ. Якщо щось залишилося незрозумілим — поверніться до конкретного блоку: <b>помилка → чому → як правильно</b>. Це і є робочий цикл, що допомагає вийти на рівень архітектора.
+  </div>
+</section>
+
+<!-- ====================== MARKETING AUTOMATION VIEW ====================== -->
+<section class="view" data-view="marketing">
+  <div class="cover-tag">Блок 02 · Рекомендації ментора</div>
+  <h1 class="cover-title"><span class="accent">Marketing</span><br>Automation</h1>
+  <p class="cover-sub">Архітектура Telegram-ботів, лендингів і email-воронок. Klaviyo, Zoho CRM, AI-кваліфікація лідів — як зробити рішення, яке витримає реальне навантаження.</p>
+
+  <!-- MODULE 1 -->
+  <section class="module" id="marketing-m1">
+    <div class="module-banner">
+      <div class="tag">Модуль 1</div>
+      <h2>AI-контент у Telegram: генерація зображень та автопублікація</h2>
+      <p class="desc">Щоб ваше рішення не виглядало як аматорська спроба, а було професійним workflow — зверніть увагу на наступні рекомендації.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Логіка розгалуження (Router / IF)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це фундамент</div>
+        <p>Це фундамент вашої архітектури. Найбільша помилка новачків — намагатися зробити все в одному вузлі. Не просто шукайте ключові слова, а спочатку визначте <b>інтент (намір)</b> користувача. Якщо користувач пише <i>«Як справи в Instagram?»</i>, він не обов’язково хоче малювати картинку.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Використовуйте вузол <b>Switch</b> або декілька <b>IF</b>, щоб чітко розділити потоки:</p>
+        <ul class="bullets">
+          <li>Запит на генерацію (є слова <b>«намалюй», «згенеруй»</b> або команди <b>insta/fb</b>).</li>
+          <li>Текстове спілкування (все інше).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Обробка команд insta та fb</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Помилка</div>
+        <p>Команди можуть бути в будь-якому місці тексту і в будь-якому регістрі. Робити жорстку перевірку на повний збіг тексту — погана ідея.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Використовуйте вираз <b>.toLowerCase()</b> для вхідного тексту перед перевіркою.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Очищення промпту</div>
+        <p>Якщо користувач пише <i>«намалюй каву insta»</i>, у запит до OpenAI Image Generation має піти <b>«кава»</b>, а параметр розміру має стати <b>1024×1792</b> або <b>1024×1024 portrait</b>. Якщо ви залишите слово <b>«insta»</b> в промпті, AI може почати малювати логотип соцмережі прямо на картинці. Вирізайте технічні команди з тексту перед відправкою в OpenAI.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Технічні параметри OpenAI Image Generation</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Технічна вимога</div>
+        <p>OpenAI (DALL-E 3) має суворі вимоги до роздільної здатності.</p>
+      </div>
+      <ul class="bullets">
+        <li><b>fb</b> (горизонтальний) → <b>1792×1024</b></li>
+        <li><b>insta</b> (вертикальний) → <b>1024×1792</b></li>
+        <li><b>default</b> (квадрат) → <b>1024×1024</b></li>
+      </ul>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Використовуйте вузол <b>Set</b> або <b>Code</b>, щоб динамічно підставляти значення ширини та висоти в залежності від знайденої команди. <b>Не створюйте три окремі вузли OpenAI</b> для кожного розміру — це поганий тон і масштабованість.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Обробка помилок (Error Handling)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Що перевірити</div>
+        <p>Бот не має «падати» або мовчати, якщо щось пішло не так. Що станеться, якщо OpenAI поверне помилку через цензуру (<b>safety system</b>) або якщо ліміти API вичерпано?</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Використовуйте <b>Error Trigger</b> або налаштуйте вузол на <b>Continue on Fail</b>, щоб надіслати користувачу зрозуміле повідомлення: <i>«Вибач, я не можу згенерувати це зображення через політику безпеки»</i> замість повної тиші.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> Користувацький досвід (UX)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>У реальному бізнесі швидкість — це гроші. Генерація картинки займає 10–20 секунд. Користувач не повинен думати, що бот «завис».</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Використовуйте дію <b>sendChatAction</b> (<b>typing</b> для тексту або <b>upload_photo</b> для картинок) у Telegram-вузлі перед основним запитом до OpenAI. Це створює відчуття живої роботи.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Підсумок</div>
+      <p>Пам’ятайте: ваша мета — створити систему, яка працює <b>автономно і передбачувано</b>. Успіхів!</p>
+    </div>
+  </section>
+
+  <!-- MODULE 2 -->
+  <section class="module" id="marketing-m2">
+    <div class="module-banner">
+      <div class="tag">Модуль 2</div>
+      <h2>Лендинг і збір лідів: від форми до Google Sheets і Telegram</h2>
+      <p class="desc">Щоб створити рішення, яке витримає реальне навантаження.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Етап Wix: збір даних</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Технічні назви полів</div>
+        <p>У налаштуваннях форми Wix обов’язково перевірте назви полів (<b>Field ID</b>). Не залишайте їх як <b>input1, input2</b>. Назвіть їх зрозуміло: <b>client_name, client_phone, client_email, message</b>. Це дозволить вам легко ідентифікувати дані в n8n.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Валідація</div>
+        <p>Переконайтеся, що в полі «Телефон» встановлено тип «Номер телефону», а в полі «Пошта» — «Email». Це перший рівень захисту від некоректних даних.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Етап n8n: архітектура Workflow</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Паралельність — це критично</div>
+        <p>Завдання вимагає побудови <b>паралельних гілок</b>. Це означає, що від ноди Webhook має йти два зв’язки одночасно: один до Google Sheets, інший — до Telegram.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Якщо Telegram-бот тимчасово впаде або видасть помилку, запис у таблицю все одно має відбутися. <b>Не з’єднуйте їх послідовно!</b></p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Цикл «Тест — Продакшн»</div>
+        <p>Спочатку використовуйте <b>Test URL</b> у Webhook, щоб n8n отримав структуру полів. Після того, як ви змапили дані в Sheets та Telegram, перейдіть на вкладку <b>Production URL</b>, перемикаєтеся на цю вкладку та копіюєте нове посилання. Потім вставляєте його у Wix замість старого (тестового).</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Етап Google Sheets: структура таблиці</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Підготовка заголовків</div>
+        <p>Спершу створіть таблицю вручну і пропишіть перший рядок (<b>Ім’я, Телефон, Пошта, Коментар, Дата</b>). n8n набагато стабільніше працює через операцію <b>Append Row</b>, коли структура вже готова.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Чистота даних</div>
+        <p>Налаштуйте формат стовпця «Дата» (якщо ви її передаєте), щоб менеджеру було зручно бачити час надходження ліда.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Етап Telegram: клієнтський сервіс</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Помилка</div>
+        <p>Не надсилайте сирий JSON. Сформуйте повідомлення так, щоб менеджер міг натиснути на номер телефону і одразу зателефонувати.</p>
+      </div>
+      <div class="callout c-ex"><div class="head"><span class="mark">▶</span>Приклад</div>
+        <p class="formula">🚀 Новий лід!<br>👤 Ім’я: {{ name }}<br>📞 Тел: {{ phone }}<br>✉️ Email: {{ email }}<br>💬 Коментар: {{ comment }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 3 -->
+  <section class="module" id="marketing-m3">
+    <div class="module-banner">
+      <div class="tag">Модуль 3</div>
+      <h2>Zoho CRM: знайомство з системою та підключення до воронки</h2>
+      <p class="desc">Стандарт професійної розробки — паралельні гілки, чіткі назви, реальні дані.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Архітектура та логіка Workflow (n8n)</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Edit Fields (Set) до розгалуження</div>
+        <p>Завжди використовуйте вузол <b>Edit Fields (Set)</b> до того, як потік розійдеться на різні гілки (Google Sheets, Telegram, Zoho). Це гарантує, що всі системи отримають <b>ідентичні, очищені дані</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Паралельні гілки</div>
+        <p>Розгалужуйте гілки <b>паралельно</b>, а не послідовно. Якщо одна система (наприклад, Telegram) тимчасово впаде, це не повинно зупиняти запис ліда в CRM.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Назви вузлів</div>
+        <p>Уникайте стандартних назв на кшталт <b>«Zoho CRM 1»</b>. Називайте вузли за їхньою дією: <b>Zoho: Create Lead, TG: Notify Manager</b>. Це стандарт професійної розробки.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Інтеграція з Zoho CRM</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Scope при створенні Client ID</div>
+        <p>Переконайтеся, що ви вірно налаштували <b>Scope</b> при створенні Client ID у Zoho. Без доступу до <b>ZohoCRM.modules.leads.CREATE</b> вузол видасть помилку.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Передавайте максимум інформації</div>
+        <p>Не обмежуйтеся лише ім’ям та телефоном. Передавайте максимум інформації з форми (наприклад, джерело ліда <b>Lead Source</b> або <b>Description</b>), щоб менеджер у CRM мав контекст.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Перевірка створення</div>
+        <p>Переконайтеся, що після виконання workflow вузол Zoho підсвічується зеленим. Навіть якщо дані ніби пішли, перевірте, чи вони з’явилися в розділі <b>Leads</b>, а не в іншому модулі.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Якість даних та тестування</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Уникайте «сміттєвих» тестів</div>
+        <p>Заповнюючи форму даними на кшталт <b>«тест123», «asdf»</b> або <b>«11111»</b>, ви демонструєте поверхневий підхід.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Тестуйте на реальних даних</div>
+        <p>Тестуйте систему на реальних іменах та номерах телефонів. Це допоможе побачити, як CRM обробляє пробіли, формати номерів та кирилицю.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Перевірки на дублікати</div>
+        <p>Робіть перевірки на дублікати: якщо клієнт натисне кнопку тричі, чи створиться у вас три однакові ліди? Якщо Email вже існує — оновлюйте існуючий лід, а не створюйте новий (логіка <b>Upsert</b>).</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Висновок</div>
+      <p>Дотримуючись цих порад, ви побудуєте не просто домашнє завдання, а <b>реальну бізнес-систему</b>, яка масштабується та працює без помилок.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 4 -->
+  <section class="module" id="marketing-m4">
+    <div class="module-banner">
+      <div class="tag">Модуль 4</div>
+      <h2>Email-воронка: Klaviyo, AI-кваліфікація та прогрів лідів</h2>
+      <p class="desc">Конкретні рекомендації щодо виконання ДЗ №4.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Налаштування AI-кваліфікації — це «мозок» вашого workflow</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Найпоширеніша помилка</div>
+        <p>Занадто складний або розмитий промпт. ШІ має повертати <b>тільки одне слово</b>: <b>hot, warm</b> або <b>cold</b>. Якщо модель почне розлого пояснювати свій вибір (<i>«Я вважаю, що цей лід гарячий, бо…»</i>), ваш наступний нод (Switch) просто не зможе розпізнати цю відповідь.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>System Prompt — конкретика</div>
+        <p>У System Prompt пропишіть, що саме вважати «hot». Наприклад: <i>«Hot — якщо клієнт вказав конкретний бюджет або термін "зараз". Cold — якщо в полі коментаря спам або беззмістовний набір символів»</i>.</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Оптимізація витрат</div>
+        <p>Для такої простої задачі не обов’язково використовувати найдорожчу <b>GPT-4</b>. Достатньо швидких та дешевих моделей (наприклад, <b>Claude Haiku</b> або <b>GPT-4o-mini</b>) — це продемонструє вашу здатність оптимізувати витрати.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Логіка маршрутизації — нод Switch</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Метафора</div>
+        <p>Нод <b>Switch</b> — це залізнична розв’язка вашої автоматизації.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Регістр має значення</div>
+        <p>Переконайтеся, що значення в Switch (Case 1, Case 2…) <b>ідентичні</b> тим, що видає ШІ. Якщо ШІ видав <b>Hot</b> (з великої літери), а у Switch налаштовано <b>hot</b> (з малої) — система видасть помилку. Використовуйте функцію <b>.toLowerCase()</b> у виразі, щоб уникнути проблем із регістром.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Вихід за замовчуванням</div>
+        <p>Завжди налаштовуйте вихід за замовчуванням. Якщо ШІ помилився або видав непередбачуваний текст, лід має потрапити хоча б у список <b>cold</b>, а не просто зависнути в системі.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Робота з Klaviyo API</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>List ID, а не назва</div>
+        <p>В n8n при відправці даних у Klaviyo вам потрібно вказувати <b>List ID</b> (унікальний буквено-цифровий код списку), а не його назву (<b>«hot»</b>). Ці ID ви знайдете в налаштуваннях кожного списку в самому Klaviyo.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Email — головний ідентифікатор</div>
+        <p>Пам’ятайте, що головним ідентифікатором у Klaviyo є <b>Email</b>. Якщо ви тестуєте систему кілька разів з однією поштою, нові профілі не створюватимуться — вони просто оновлюватимуться в існуючих списках.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 5 -->
+  <section class="module" id="marketing-m5">
+    <div class="module-banner">
+      <div class="tag">Модуль 5</div>
+      <h2>Фінальний проєкт: повна AI-автоворонка та тестування</h2>
+      <p class="desc">5 конкретних порад, які допоможуть зробити твій кейс професійним, а не формальним.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Продавайте «біль», а не інструмент (розділ Problem)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Клієнти купують <b>рішення проблем</b>, а не «автоматизацію на n8n».</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Замість абстрактного <i>«менеджери довго відповідали»</i>, напишіть конкретно: <i>«Через затримку у відповіді понад 3 години конверсія з ліда в запис падала на 40 %, а менеджери витрачали 70 % часу на ручне сортування спаму»</i>. Чим чіткіше окреслена проблема, тим дорожче виглядає ваше рішення.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Покажіть «мізки» системи (розділ Process)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Помилка багатьох</div>
+        <p>Просто скинути скриншот workflow.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Експертний підхід</div>
+        <p>Експерт показує <b>логіку прийняття рішень AI</b>. У розділі <b>Prompt design</b> обов’язково пояснити:</p>
+        <ul class="bullets">
+          <li>Яку техніку промптингу використано (наприклад, <b>Few-shot</b> або <b>Chain-of-Thought</b>)?</li>
+          <li>Як ви навчили модель відрізняти цільового ліда від нецільового?</li>
+          <li>Як обробляються помилки (якщо API впаде або AI поверне некоректний JSON)?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Результати — це не лише «швидко», а й «дешево» та «масштабовано»</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Три показники у цифрах</div>
+        <p>Три показники у цифрах — це мінімум. Але вони мають бути реалістичними:</p>
+        <ul class="bullets">
+          <li><b>Економіка:</b> порівняйте вартість роботи ШІ (наприклад, <b>$0.05 за ліда</b>) з вартістю години роботи асистента.</li>
+          <li><b>Швидкість:</b> скорочення часу реакції з годин до секунд.</li>
+          <li><b>Якість:</b> відсоток точності класифікації (наприклад, <i>«AI вірно розпізнав 95 % запитів за результатами тестування на 50 діалогах»</i>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Робіть Loom-відео для бізнесу, а не для розробників</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Помилка</div>
+        <p>Не записуйте 10 хвилин роздумів над кожним вузлом n8n.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Ідеальний скринкаст</div>
+        <p>Триває <b>2–3 хвилини</b> і будується за принципом:</p>
+        <ul class="bullets">
+          <li><b>Trigger:</b> показуєте, як заповнюється форма або приходить повідомлення.</li>
+          <li><b>Action:</b> поверхнево показуєте, як біжать дані в n8n (це створює ефект магії).</li>
+          <li><b>Result:</b> показуєте кінцевий результат (сформована картка в CRM, персоналізований лист або сповіщення в телеграм). Клієнт має побачити саме <b>готовий продукт</b>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> Гігієна workflow та документація</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Скриншот = ваше обличчя</div>
+        <p>Ваш скриншот n8n у кейсі — це твоє обличчя як розробника.</p>
+      </div>
+      <ul class="bullets">
+        <li><b>Ноди мають бути перейменовані:</b> не <b>OpenAI1</b>, а <b>AI: Analyze Intent</b>.</li>
+        <li><b>Sticky Notes:</b> можна додати у самому n8n коментарі до блоків логіки, щоб навіть нетехнічна людина зрозуміла схему.</li>
+        <li><b>Чистота:</b> вирівняйте зв’язки між нодами. Хаотична «павутина» говорить про такий самий хаос у логіці архітектора.</li>
+      </ul>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Головне питання клієнта</div>
+      <p>Пам’ятайте: ваш кейс повинен відповідати на головне питання клієнта: <i>«Чи можу я довірити цій людині автоматизацію своїх грошей?»</i> Виконуйте ДЗ з цим фокусом.</p>
+    </div>
+  </section>
+
+  <hr class="fade">
+  <div class="footer">
+    Marketing Automation — це не про з’єднування нод, а про <b>проєктування бізнес-системи</b>, яка приносить гроші. Перевіряйте паралельність, валідуйте дані, тестуйте на реальних кейсах.
+  </div>
+</section>
+
+<!-- ====================== SALES AUTOMATION VIEW ====================== -->
+<section class="view" data-view="sales">
+  <div class="cover-tag">Блок 03 · Рекомендації ментора</div>
+  <h1 class="cover-title"><span class="accent">Sales</span><br>Automation</h1>
+  <p class="cover-sub">AI Sales Qualification, follow-up каскади, голосові агенти, звітність для CEO. Як автоматизувати реальний відділ продажів — а не «зробити для галочки».</p>
+
+  <!-- MODULE 1 -->
+  <section class="module" id="sales-m1">
+    <div class="module-banner">
+      <div class="tag">Модуль 1</div>
+      <h2>AI Sales Qualification: глибока оцінка готовності ліда</h2>
+      <p class="desc">Ключові рекомендації, що допоможуть мислити як справжній AI-архітектор і уникнути типових помилок.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Частина 1. Аудит процесів продажів</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Уважна математика</div>
+        <p>Пам’ятайте, що конверсія кожного етапу розраховується <b>відносно попереднього кроку</b>, а не від загальної кількості вхідних лідів.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Фокус AI-рішення</div>
+        <p>Ваша пропозиція щодо автоматизації має бити точно у знайдений «вузький отвір». Якщо найбільші втрати відбуваються на етапі <b>кваліфікації</b>, рішення має стосуватися <b>скорингу або збору первинних даних</b>, а не генерації комерційних пропозицій (КП).</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Частина 2. Аналіз поточних даних у CRM</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Пріоритетність для B2B</div>
+        <p>Обираючи поле з критичним пробілом, думайте категоріями <b>закриття угоди</b>. Наприклад, без інформації про <b>особу, що приймає рішення (ЛПР)</b>, або без «болю» менеджери витрачають час наосліп. Обґрунтовуйте вибір саме впливом на <b>фінальну конверсію</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Частина 3. Система збагачення даних</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Нативність скрипта</div>
+        <p>Скрипт не повинен звучати як <b>допит</b>. Використовуйте плавні переходи та базуйте питання на контексті клієнта (наприклад, <i>«Ви залишали заявку, хочу уточнити пару деталей, щоб зекономити ваш час»</i>). Питати в лоб <i>«Який у вас бюджет?»</i> — неефективно.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Контроль галюцинацій у промпті</div>
+        <p>ШІ має властивість генерувати «воду». У промпті чітко задайте <b>роль, контекст продукту та жорсткий формат виводу</b>. Обов’язково вкажіть системі, щоб аргументи були прив’язані до специфіки ліда (наприклад, до його галузі чи розміру).</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Частина 4. RFM-аналіз</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Точність метрик</div>
+        <p>RFM-аналіз не пробачає неуважності. Уважно звіряйте дані клієнтів зі шкалою балів. Наприклад, переконайтеся, що ви правильно класифікуєте межові значення (як-от <b>150 днів для показника R</b> — це бал <b>2, а не 1</b>).</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Бізнес-логіка сегментації</div>
+        <p>Якщо ви помилитесь у розрахунках, лояльний клієнт може потрапити в сегмент <b>«At Risk»</b> або <b>«Lost»</b>. У реальному бізнесі це означатиме запуск неправильних (і часто дорогих) маркетингових дій.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Логічні дії на сегмент</div>
+        <p>Для кожного сегмента пропонуйте логічну дію: <b>VIP-умови</b> для чемпіонів, <b>upsell</b> для лояльних, <b>реактивація</b> для втрачених.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Ваша мета</div>
+      <p>Ваша мета у цьому завданні — не просто заповнити таблиці, а <b>спроєктувати цілісну логіку</b>, де аналітика даних диктує, які саме AI-інструменти нам потрібно впровадити для зростання продажів.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 2 -->
+  <section class="module" id="sales-m2">
+    <div class="module-banner">
+      <div class="tag">Модуль 2</div>
+      <h2>AI Follow-Up Engine: персональні каскади дотиків</h2>
+      <p class="desc">Рекомендації, сформовані на основі реальної практики та типових помилок студентів.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Поради щодо роботи в n8n (Завдання 1)</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Пріоритетність у Switch Node</div>
+        <p>Це найважливіший технічний момент. Завжди ставте умову <b>«Червоний» (24+) першою</b>, а <b>«Жовтий» (4+) — другою</b>. Якщо зробити навпаки, ліди з простроченням <b>30 годин</b> потраплять у «жовту» гілку, бо вони технічно підпадають під умову «більше 4», і система ніколи не відправить критичне сповіщення.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Чистота даних</div>
+        <p>Перед вузлом Switch рекомендується додати ноду <b>Edit Fields (Set)</b>. Це дозволить вам нормалізувати дані з Webhook (наприклад, перетворити рядки на числа), щоб умови в Switch спрацьовували без збоїв.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Динамічні повідомлення</div>
+        <p>Не пишіть статичний текст. Використовуйте змінні <b>{{ $json.lead_name }}</b> тощо безпосередньо в полі тексту Telegram-ноди. Переконайтеся, що посилання на CRM у повідомленні є <b>клікабельним</b>.</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Уникайте надлишковості</div>
+        <p>Не використовуйте ШІ-ноди там, де достатньо звичайного шаблону повідомлення. Алерти мають бути <b>миттєвими та безкоштовними</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Побудова бази знань</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Конкретика в кейсах</div>
+        <p>Замість фрази <i>«ми допомогли багатьом клієнтам»</i>, напишіть: <i>«Компанія X отримала результат Y за Z місяців»</i>. Чим більше цифр у базі знань, тим переконливішим буде ШІ під час генерації КП.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Структурованість</div>
+        <p>Розділяйте базу знань на чіткі блоки (<b>Продукт, Тарифи, Кейси, УТП</b>). Це допоможе моделі не плутати ціну одного пакету з описом іншого.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Промпт-інжиніринг (Завдання 2)</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Українська граматика (кличний відмінок)</div>
+        <p>Це маркер професіоналізму. Додайте в промпт інструкцію: <i>«Звертайся до ліда виключно в кличному відмінку (наприклад, Олено, Максиме, пане Дмитре)»</i>. ШІ часто помиляється і пише <b>«Вітаю, Максим»</b>, що видає роботу бота.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Чітка межа Score</div>
+        <p>У промпті детально пропишіть різницю в CTA (заклику до дії). Для <b>Cold (0–40)</b> пропонуйте «м’який» крок (<i>дегустація, консультація, гайд</i>). Для <b>Hot (41–100)</b> — «жорсткий» крок (<i>запис на аудит, бронювання дати, виїзд спеціаліста сьогодні</i>).</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Заборона на галюцинації</div>
+        <p>Обов’язково вкажіть у промпті: <i>«Використовуй тільки факти з наданої бази знань. Якщо інформації про індустрію ліда немає, вибирай найбільш схожий кейс, але не вигадуй нові назви компаній чи цифри»</i>.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Висновок</div>
+      <p>Дотримання цих порад допоможе вам не просто «закрити ДЗ», а створити систему, яку <b>можна впроваджувати в реальний відділ продажів</b>.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 3 -->
+  <section class="module" id="sales-m3">
+    <div class="module-banner">
+      <div class="tag">Модуль 3</div>
+      <h2>AI Sales Assistant: КП, скрипти, заперечення</h2>
+      <p class="desc">Щоб ваша робота виглядала професійно, а не як «просто з’єднані ноди».</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Валідація в Code-ноді: не просто копіпаст</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Багато хто просто копіює регулярний вираз <b>/^\d+$/</b>.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>В реальних проєктах користувачі шлють <b>пробіли, посилання або випадкові слова</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Переконайтеся, що ви розумієте, що робить цей код. Якщо ви надішлете <b>Lead ID 12345 </b> (з пробілом), ваш регулярний вираз його відхилить. Подумайте, чи варто додавати <b>.trim()</b> або очищення від зайвих символів перед валідацією.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Обробка помилок (Error Handling) — це не бонус</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Без неї workflow сирий</div>
+        <p>У ТЗ «Обробка помилок» винесена в бонуси, але як ментор я кажу: <b>без неї workflow вважається сирим</b>.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Проблема</div>
+        <p>Якщо Code-нода повертає об’єкт з <b>error: true</b>, а ви ведете зв’язок далі в HTTP Request, воркфлоу впаде з помилкою <b>404</b> або <b>400</b>, бо замість ID прийде пустий рядок.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Рекомендація</div>
+        <p>Використовуйте ноду <b>If</b> або <b>Switch</b> одразу після коду. Якщо формат ID невірний — одразу відправляйте повідомлення в Telegram <i>«Помилка: введіть коректний ID»</i> і зупиняйте сценарій. Не навантажуйте API Zoho некоректними запитами.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Робота з Zoho CRM</h3>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Регіони</div>
+        <p>Зверніть увагу на домен (<b>.eu</b> чи <b>.com</b>). Якщо ваш акаунт Zoho на <b>.com</b>, а в ноді вказано <b>.eu</b> — ви отримаєте помилку авторизації.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Структура відповіді</div>
+        <p>Zoho повертає дані у масиві <b>data</b>. В LLM-ноді важливо передавати не весь «сміттєвий» JSON-відповідь від сервера, а саме об’єкт ліда: <b>{{ $json.data[0] }}</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Якщо ліда не знайдено (ID коректний за форматом, але не існує в базі), Zoho поверне <b>404</b> або <b>порожній масив</b>. Ваша автоматизація має це передбачити, інакше AI почне галюцинувати на пустих даних.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Промпт-інжиніринг: віддавайте контекст</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому промпт із ТЗ — це мінімум</div>
+        <p>Запропонований у ТЗ промпт — це <b>мінімум</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>AI видасть набагато кращий результат, якщо ви додасте в промпт <b>назву вашої компанії або роль менеджера</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Чистота даних</div>
+        <p>Замість того, щоб кидати в LLM весь <b>JSON.stringify($json)</b>, краще виберіть конкретні поля: <i>Ім’я: {{ $json.First_Name }}, Компанія: {{ $json.Company }}, Нотатки: {{ $json.Description }}</i>. Це економить токени й фокусує модель на головному.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> UX у Telegram</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Очікування</div>
+        <p>Користувач не знає, що бот працює. Між відправкою ID і відповіддю проходить <b>5–10 секунд</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порада</div>
+        <p>Професійно було б додати ноду <b>Telegram (send message)</b> з текстом <i>«⏳ Аналізую дані ліда…»</i> одразу після отримання запиту. Але в межах цього ТЗ (5 нод) просто переконайтеся, що фінальна відповідь структурована.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Markdown</div>
+        <p>Використовуйте <b>жирний шрифт</b> для заголовків блоків (<b>СТАТУС, СКРИПТ</b>), щоб менеджер міг швидко зчитати інформацію з екрана телефону на ходу.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 4 -->
+  <section class="module" id="sales-m4">
+    <div class="module-banner">
+      <div class="tag">Модуль 4 · Бонус</div>
+      <h2>Створення голосового агента</h2>
+      <p class="desc">Голосовий агент — це алгоритм, а не художній твір.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Проєктування System Prompt (логіка vs текст)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Найбільша помилка</div>
+        <p>Писати промпт як художній твір. Голосовий агент — це <b>алгоритм</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Структуруйте через ролі та обмеження</div>
+        <p>Чітко пропишіть <b>Persona, Objective, Guidelines та Constraint</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Управління діалогом</div>
+        <p>Агент не повинен видавати монолог на 30 секунд. Пропишіть правило: <i>«Одна репліка — одне питання або одна думка»</i>.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Edge Cases</div>
+        <p>Що робити, якщо клієнт каже <i>«Я вас не чую»</i>, <i>«Передзвоніть пізніше»</i> або починає кричати? Якщо в промпті немає інструкції для переривання або відмови — це слабке рішення.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Робота з Knowledge Base (чистота даних)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Помилка</div>
+        <p>Не копіюйте весь сайт у базу знань.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Формат</div>
+        <p>Використовуйте <b>структурований Markdown</b> або <b>FAQ-подібний список</b>.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Актуальність</div>
+        <p>Якщо в базі написано <i>«Доставка 2 дні»</i>, а агент у розмові каже <i>«Завтра буде»</i> — це <b>галюцинація через конфлікт промпта та бази</b>. Дані в Knowledge Base мають бути пріоритетними.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Інтеграції</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Це технічне ядро вашого проєкту</div>
+        <p>Це технічне ядро вашого проєкту.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Init Tool</div>
+        <p>AI має не просто знати ім’я, а <b>використовувати контекст</b>. Наприклад: <i>«Вітаю, Олександре! Телефоную щодо вашого замовлення №123»</i>, а не <i>«Добрий день. Ви Олександр?»</i>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Webhook Action</div>
+        <p>Перевірте передачу типів даних. Якщо ви передаєте номер замовлення як <b>текст</b>, а ваша база чекає <b>число</b> — інтеграція впаде. Агент має вміти обробити помилку API (наприклад, якщо статус замовлення не знайдено).</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Postcall</div>
+        <p>Summary має бути <b>структурованим</b> (JSON або чіткі пункти: <b>Статус, Настрій, Домовленість</b>). <i>«Дзвінок пройшов добре»</i> — це не результат для бізнесу.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">4.</span> Тестування та ітерації (методологія)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>10 дзвінків — це не 10 однакових розмов</div>
+        <p>10 дзвінків — це не 10 однакових розмов.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Стрес-тести</div>
+        <p>Спробуйте «збити» бота з пантелику, перебийте його, змініть тему в середині розмови.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Порівняння До/Після</div>
+        <p>Я очікую побачити не косметичні зміни в промпті (заміна <i>«Привіт»</i> на <i>«Вітаю»</i>), а <b>функціональні</b> (наприклад: <i>«Додано інструкцію не перепитувати адресу, якщо вона є в Init Tool»</i>).</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">5.</span> Метрики (бізнес-погляд)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Бізнесу важливий Resolution Rate</div>
+        <p>Бізнесу байдуже на «красивий голос». Бізнесу важливий <b>Resolution Rate</b>.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Human Handoff Rate</div>
+        <p>Якщо ваш <b>Human Handoff rate</b> (передача на оператора) складає <b>80 %</b> — ваша автоматизація <b>марна</b>.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Latency</div>
+        <p>Зверніть увагу на <b>Latency</b> (затримку відповіді). Якщо бот думає <b>більше 2–3 секунд</b> — клієнт покладе слухавку.</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Порада від ментора</div>
+      <p>Перед тим як збирати в <b>Happ.tools</b>, пропишіть «дерево розмови» на папері або в <b>Miro</b>. Позначте точки, де бот має звернутися до API (Webhook), а де — до бази знань. Якщо ви не розумієте логіку процесу без софту, софт вам не допоможе зробити його якісним.</p>
+      <p>Будьте конкретними, уникайте «води» в промптах і фокусуйтеся на тому, щоб бот <b>вирішував проблему клієнта за мінімальну кількість кроків</b>.</p>
+    </div>
+  </section>
+
+  <!-- MODULE 5 -->
+  <section class="module" id="sales-m5">
+    <div class="module-banner">
+      <div class="tag">Модуль 5</div>
+      <h2>Звітність</h2>
+      <p class="desc">AI Sales Reporting, Deal Health Alerts, CEO Forecast — три рівні агрегації даних.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Частина 1: AI Sales Reporting (архітектура агента)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Найбільша помилка</div>
+        <p>Годувати AI всіма даними одразу. Це <b>дорого і неефективно</b>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Автономність агента</div>
+        <p>У ТЗ чітко вказано: агент має <b>самостійно викликати Tool</b> для уточнення деталей по проблемних угодах. Якщо ви просто передаєте масив даних і просите <i>«зроби звіт»</i>, ви не використовуєте можливості <b>Agentic workflow</b>. Агент повинен побачити аномалію (наприклад, сума угоди <b>$10,000</b>, а стадія «Переговори» триває <b>30 днів</b>) і вирішити: <i>«Мені треба викликати get_deal_details, щоб зрозуміти причину»</i>.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Structured Output</div>
+        <p>Не ігноруйте <b>JSON Schema</b>. Ваш звіт у Telegram має бути структурованим. Якщо AI поверне сирий текст замість JSON, ваш наступний крок (парсинг для Telegram) може зламатися.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Prompt Engineering</div>
+        <p>У System Message чітко пропишіть <b>роль (Senior Sales Analyst)</b> та <b>критерії проблемності угод</b>. Без цього AI буде видавати занадто загальні поради.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Частина 2: Deal Health Alerts (логіка та стійкість)</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Це технічно найскладніша частина</div>
+        <p>Це технічно найскладніша частина, де перевіряється ваша здатність працювати з циклами та зовнішніми сервісами.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Sub-workflow та обробка помилок</div>
+        <p>Використання опції <b>Never Error</b> у Sub-workflow — це не лінь, а <b>професійний підхід</b>. Якщо у однієї угоди з десяти немає нотаток (Notes) і API поверне 404, весь ваш Loop не має зупинятися. Ви повинні передбачити «порожні» відповіді.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Ефективність передачі даних</div>
+        <p>Передавайте в AI Agent <b>тільки релевантну інформацію</b> через <b>JSON.stringify</b>. Величезні масиви системних метаданих CRM тільки «засмічують» контекстне вікно та знижують якість оцінки Score.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Логіка Switch — класична пастка</div>
+        <p>В n8n (та й у програмуванні загалом) умови перевіряються <b>зверху вниз</b>. Якщо ви поставите умову <b>Score ≤ 7 (Medium)</b> вище, ніж <b>Score ≤ 4 (Critical)</b>, то критична угода потрапить у гілку Medium. <b>Завжди йдіть від найбільш жорсткого фільтра до найслабшого.</b></p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Google Sheets (Idempotency)</div>
+        <p>Використовуйте режим <b>Append or Update</b>. Система повинна бути <b>ідемпотентною</b>: скільки б разів ви не запустили сценарій за один період, у таблиці не має бути дублікатів по одному <b>Deal ID</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Частина 3: CEO Forecast (агрегація)</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Нода Aggregate</div>
+        <p>Не намагайтеся писати складний код там, де працює стандартна функція. Ваша задача — зібрати результати аналізу багатьох угод в один об’єкт, щоб AI бачив <b>«всю картину» цілком</b>, а не кожну угоду окремо.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Якість висновків</div>
+        <p>CEO не потрібен перелік угод (він є в Частині 2). CEO потрібні <b>тренди</b>. Налаштуйте промпт так, щоб AI шукав закономірності: наприклад, <i>«Угоди в секторі IT застряють на етапі контрактування»</i>.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="fade">
+  <div class="footer">
+    Sales Automation — це про <b>гроші клієнта</b>. Кожна нода, кожна перевірка, кожен промпт — це або зекономлені витрати, або втрачений лід. Будуйте архітектуру так, ніби від цього залежить бюджет великої компанії.
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  // ====== ROUTING ======
+  const VIEWS = ["home","prompt","marketing","sales"];
+  const BLOCK_LABELS = {prompt:"Prompt Engineering & AI Agents",marketing:"Marketing Automation",sales:"Sales Automation"};
+
+  function parseHash(){
+    const raw = (location.hash || "#home").replace(/^#/,"");
+    const [view, anchor] = raw.split("/");
+    return {view: VIEWS.includes(view) ? view : "home", anchor: anchor || null};
+  }
+
+  function showView(view){
+    document.querySelectorAll(".view").forEach(v=>{
+      v.classList.toggle("on", v.dataset.view === view);
+    });
+    document.querySelectorAll(".side-pane").forEach(p=>{
+      p.style.display = (p.dataset.pane === view) ? "" : "none";
+    });
+    document.querySelectorAll(".blocks-tabs a").forEach(a=>{
+      a.classList.toggle("on", a.dataset.route === view);
+    });
+    document.title = view === "home"
+      ? "Рекомендації ментора — AI Automator"
+      : `Рекомендації ментора — ${BLOCK_LABELS[view]}`;
+  }
+
+  function applyRoute(){
+    const {view, anchor} = parseHash();
+    showView(view);
+    if (anchor && view !== "home"){
+      const target = document.getElementById(`${view}-${anchor}`);
+      if (target){
+        setTimeout(()=> target.scrollIntoView({behavior:"smooth", block:"start"}), 30);
+      }
+    } else {
+      window.scrollTo({top:0,behavior:"instant"});
+    }
+    setTimeout(updateActive, 60);
+  }
+
+  window.addEventListener("hashchange", applyRoute);
+  document.addEventListener("DOMContentLoaded", applyRoute);
+
+  // ====== CHECKLIST PERSISTENCE ======
+  const CK_KEY = "mentor-recs-checklist-v2";
+  const ck = JSON.parse(localStorage.getItem(CK_KEY) || "{}");
+  document.querySelectorAll('.checklist input[type=checkbox]').forEach(cb=>{
+    const k = cb.dataset.cl;
+    if (k && ck[k]){
+      cb.checked = true;
+      cb.closest("label").classList.add("done");
+    }
+    cb.addEventListener("change", ()=>{
+      ck[k] = cb.checked;
+      localStorage.setItem(CK_KEY, JSON.stringify(ck));
+      cb.closest("label").classList.toggle("done", cb.checked);
+    });
+  });
+
+  // ====== ACTIVE MODULE & PROGRESS ======
+  function updateActive(){
+    const {view} = parseHash();
+    if (view === "home") return;
+    const sections = [...document.querySelectorAll(`section.view[data-view="${view}"] .module`)];
+    const navLinks = [...document.querySelectorAll(`aside .side-nav[data-block="${view}"] a`)];
+    if (!sections.length) return;
+    const fromTop = window.scrollY + 140;
+    let active = 0;
+    sections.forEach((s, i)=>{ if (s.offsetTop <= fromTop) active = i; });
+    navLinks.forEach((a, i)=> a.classList.toggle("active", i === active));
+
+    // Progress
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0;
+    const fill = document.querySelector(`[data-progress="${view}"]`);
+    const lbl = document.querySelector(`[data-progress-pct="${view}"]`);
+    if (fill) fill.style.width = pct + "%";
+    if (lbl) lbl.textContent = Math.round(pct) + "%";
+  }
+  document.addEventListener("scroll", updateActive, {passive:true});
+  window.addEventListener("resize", updateActive);
+
+  // ====== SMOOTH SCROLL FOR SIDEBAR LINKS ======
+  document.addEventListener("click", e=>{
+    const a = e.target.closest("aside .side-nav a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    // Let hashchange handle view switching; intercept for smooth scroll if same view
+    const {view} = parseHash();
+    const targetView = href.replace(/^#/,"").split("/")[0];
+    if (targetView === view){
+      e.preventDefault();
+      history.replaceState(null,"",href);
+      applyRoute();
+    }
+  });
+</script>
+</body>
+</html>
