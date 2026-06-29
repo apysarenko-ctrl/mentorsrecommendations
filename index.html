@@ -416,6 +416,7 @@
         <a href="#prompt" data-route="prompt"><span class="dot"></span>Prompt Engineering</a>
         <a href="#marketing" data-route="marketing"><span class="dot"></span>Marketing Automation</a>
         <a href="#sales" data-route="sales"><span class="dot"></span>Sales Automation</a>
+        <a href="#customer" data-route="customer"><span class="dot"></span>Customer Services</a>
       </nav>
     </div>
   </div>
@@ -434,6 +435,7 @@
         <a href="#prompt"><span class="num">01</span><span>Prompt Engineering & AI Agents</span></a>
         <a href="#marketing"><span class="num">02</span><span>Marketing Automation</span></a>
         <a href="#sales"><span class="num">03</span><span>Sales Automation</span></a>
+        <a href="#customer"><span class="num">04</span><span>Customer Services</span></a>
       </nav>
     </div>
   </div>
@@ -477,6 +479,25 @@
     </div>
   </div>
 
+  <!-- CUSTOMER SERVICES SIDEBAR -->
+  <div class="side-pane" data-pane="customer" style="display:none">
+    <div class="side-card">
+      <div class="kicker">Блок 04</div>
+      <h3>Customer Services</h3>
+      <nav class="side-nav" data-block="customer">
+        <a href="#customer/m1"><span class="num">1.</span><span>Стратегічний аналіз</span></a>
+        <a href="#customer/m2"><span class="num">2.</span><span>Стратегія та інструменти</span></a>
+        <a href="#customer/m3"><span class="num">3.</span><span>AI в email-підтримці</span></a>
+        <a href="#customer/m4"><span class="num">4.</span><span>Фідбек, NPS та аналітика</span></a>
+        <a href="#customer/m5"><span class="num">5.</span><span>SLA, тікети та ескалації</span></a>
+      </nav>
+    </div>
+    <div class="side-card progress-card">
+      <div class="label"><span>Прогрес читання</span><span data-progress-pct="customer">0%</span></div>
+      <div class="bar"><div class="fill" data-progress="customer"></div></div>
+    </div>
+  </div>
+
   <!-- SALES SIDEBAR -->
   <div class="side-pane" data-pane="sales" style="display:none">
     <div class="side-card">
@@ -504,7 +525,7 @@
   <div class="home-hero">
     <div class="home-tag">Mentor Recommendations</div>
     <h1 class="home-title">Технічні рекомендації<br><span class="accent">від ментора курсу</span></h1>
-    <p class="home-sub">Шпаргалка по 3 блоках курсу AI Automator. Відкривайте перед кожним ДЗ — і виконуйте завдання як архітектор системи, а не як замовник.</p>
+    <p class="home-sub">Шпаргалка по 4 блоках курсу AI Automator. Відкривайте перед кожним ДЗ — і виконуйте завдання як архітектор системи, а не як замовник.</p>
   </div>
 
   <div class="blocks-grid">
@@ -524,6 +545,12 @@
       <div class="num">// Блок 03</div>
       <h4>Sales Automation</h4>
       <p>AI Sales Qualification, follow-up каскади, голосові агенти, звітність для CEO. 5 модулів про те, як автоматизувати реальний відділ продажів.</p>
+      <div class="meta"><span class="pill">5 модулів</span><span class="arrow">↗</span></div>
+    </a>
+    <a href="#customer" class="block-card">
+      <div class="num">// Блок 04</div>
+      <h4>Customer Services</h4>
+      <p>Стратегічний аналіз, email-автоматизація, збір фідбеку та NPS, SLA і тікет-системи. 5 модулів про те, як побудувати клієнтський сервіс на базі AI.</p>
       <div class="meta"><span class="pill">5 модулів</span><span class="arrow">↗</span></div>
     </a>
   </div>
@@ -1664,13 +1691,271 @@
   </div>
 </section>
 
+<!-- ====================== CUSTOMER SERVICES VIEW ====================== -->
+<section class="view" data-view="customer">
+  <div class="cover-tag">Блок 04 · Рекомендації ментора</div>
+  <h1 class="cover-title"><span class="accent">Customer</span><br>Services</h1>
+  <p class="cover-sub">Стратегічний аналіз, AI в email-підтримці, збір фідбеку, NPS та SLA-контроль. Як побудувати клієнтський сервіс, що працює сам — і при цьому не замінює людину там, де вона потрібна.</p>
+
+  <!-- MODULE 1 -->
+  <section class="module" id="customer-m1">
+    <div class="module-banner">
+      <div class="tag">Модуль 1</div>
+      <h2>Стратегічний аналіз перед автоматизацією</h2>
+      <p class="desc">Автоматизація хаосу призводить лише до автоматизованого хаосу. Спочатку — аналіз, потім — код.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Анатомія проблеми та RCA</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Навчіться чітко відокремлювати <b>емоції замовника</b> («усі втомлені», «клієнти злі») від <b>метрик</b>. Завжди шукайте першопричину — без неї ви вирішуєте симптоми, а не хворобу.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Задавайте питання, що мають кількісну відповідь: <i>«Скільки годин займає відповідь?»</i>, <i>«Який відсоток запитів — типові питання?»</i>. Без цифр — немає аналізу.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Метод 5 Why: ШІ — ваш спаринг-партнер, а не оракул</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>ШІ — чудовий спаринг-партнер, але він може галюцинувати або йти поверхневим шляхом. Якщо його відповідь банальна (наприклад: <i>«Менеджери не встигають, бо в них мало часу»</i>) — зупиніть його!</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Направляйте ШІ питаннями, додаючи контекст про бізнес-процеси: <i>«Ні, подивись на дані кейсу. Вони не встигають, бо 50 % запитів — це тупі питання про статус доставки. Давай заново з цього місця»</i>. Ментор має побачити у вашому Google Doc, що ви <b>керували процесом</b>, а не просто натиснули кнопку.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> ROI та Business Case: рахуйте гроші до того, як відкрили n8n</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Оцінка вартості проблеми — це ваш головний аргумент під час продажу рішень клієнту.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Дві прості речі для розрахунку</div>
+        <ul class="bullets">
+          <li><b>Скільки бізнес витрачає зараз:</b> наприклад, бюджет на підтримку $2 500/міс.</li>
+          <li><b>Скільки буде витрачати:</b> наприклад, $50/міс на софт + $20 на AI-токени = $70. Опишіть це словами: <i>«Ми витрачаємо $2 500, а будемо витрачати $70 на софт + залишимо менеджерів суто на складні продажі»</i>.</li>
+        </ul>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Лайфхак</div>
+        <p>Звикайте рахувати ROI ще на папері — це відрізняє архітектора рішень від виконавця завдань.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 2 -->
+  <section class="module" id="customer-m2">
+    <div class="module-banner">
+      <div class="tag">Модуль 2</div>
+      <h2>Вибір стратегії та інструментів автоматизації</h2>
+      <p class="desc">Таблиця метрик, логіка ROI та правильна робота з ШІ в аналізі — три кити цього ДЗ.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Таблиця 4 метрик — жодної філософії, тільки сухі факти</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Не пишіть у колонку «Дані з кейсу» фрази на кшталт <i>«Клієнти дуже злі»</i> або <i>«Обсяг великий»</i>. Це не дані — це враження.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Тільки цифри з тексту кейсу:</p>
+        <ul class="bullets">
+          <li><b>Volume</b> — 900 звернень/міс.</li>
+          <li><b>Category</b> — 50 % запитів про доставку.</li>
+          <li><b>Quality</b> — CSAT впав з 4.3 до 2.9, відповідь займає 11 годин.</li>
+        </ul>
+        <p>Якщо ви берете власний бізнес і точних цифр немає — напишіть реалістичні приблизні, але <b>обов'язково вкажіть одиниці виміру</b>.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Фокус AI-рішення — б'ємо точно у «вузьке місце»</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Правило</div>
+        <p>Ваша пропозиція щодо автоматизації має бити точно у знайдений «вузький отвір». Якщо найбільші втрати відбуваються на етапі <b>кваліфікації</b>, рішення має стосуватися <b>скорингу або збору первинних даних</b>, а не генерації комерційних пропозицій.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Увага</div>
+        <p>Не автоматизуйте все підряд. Зосередьтесь на тому, що коштує бізнесу найбільше — за цифрами, а не за відчуттями замовника.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Розрахунок ROI — не бійтеся математики</h3>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Формула</div>
+        <p>Вам не потрібно бути фінансовим директором. Порахуйте дві прості речі:</p>
+        <ul class="bullets">
+          <li><b>Поточні витрати</b> (час менеджерів × ставка + вартість помилок).</li>
+          <li><b>Витрати після автоматизації</b> (вартість інструментів + час на обслуговування).</li>
+        </ul>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Лайфхак</div>
+        <p>Навіть груба оцінка ROI (<i>«$2 500 → $70/міс»</i>) у кейсі переконує клієнта більше, ніж будь-яка технічна схема в n8n.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 3 -->
+  <section class="module" id="customer-m3">
+    <div class="module-banner">
+      <div class="tag">Модуль 3</div>
+      <h2>AI у клієнтському сервісі — автоматизуємо emails</h2>
+      <p class="desc">Системний промпт, чистий JSON та правильне тестування — три кити email-автоматизації.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Що таке «Системний промпт» і чому шаблону з уроку мало</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Уявіть, що ви берете на роботу людину і даєте їй загальну інструкцію: <i>«Ти працюєш у підтримці. Будь ввічливим»</i>. Клієнт запитає: <i>«Яка ціна стрижки боксом?»</i>, а менеджер не знає, де він працює — в барбершопі чи в онлайн-школі!</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Чітко пропишіть роль на початку промпту: <i>«Ти — ШІ-асистент мережі барбершопів BRO Barbershop. Твоє завдання — аналізувати листи клієнтів...»</i>. Роль, контекст продукту, жорсткий формат виводу — це мінімум для будь-якого системного промпту.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Головний біль новачків — JSON-формат</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Що відбувається</div>
+        <p>Коли n8n звертається до OpenAI, він очікує отримати відповідь у вигляді чистої структури. Якщо ШІ напише: <i>«Привіт! З радістю допомагаю. Ось аналіз листа: { … }»</i> — n8n «вилетить» із помилкою, бо йому потрібні тільки фігурні дужки {}.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>У системному промпті суворо напишіть: <i>«Повертай ТІЛЬКИ чистий JSON. Не додавай жодних вступних слів, коментарів чи привітань»</i>.</p>
+      </div>
+      <div class="callout c-warn"><div class="head"><span class="mark">⚠</span>Золоте правило</div>
+        <p>Жодного тексту навколо JSON — або сценарій зламається.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Як правильно тестувати (Крок 4)</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Надсилати 5 однакових листів на кшталт <i>«Привіт, як справи»</i>. ШІ має пройти стрес-тест.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Мінімальний набір тестових листів</div>
+        <ul class="bullets">
+          <li><b>Лист 1:</b> реальний жахливий скандал (перевірити пріоритет P1).</li>
+          <li><b>Лист 2:</b> спам про продаж криптовалюти (перевірити P4 — бот має його проігнорувати).</li>
+          <li><b>Лист 3:</b> звичайне питання про ціну (P3).</li>
+        </ul>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Лайфхак</div>
+        <p>Перевірте в <b>Execution History</b> в n8n — чи побігли стрілочки в правильні сторони для кожного листа. Це і є доказом того, що система працює.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 4 -->
+  <section class="module" id="customer-m4">
+    <div class="module-banner">
+      <div class="tag">Модуль 4</div>
+      <h2>AI — збір фідбеку, NPS та аналітика</h2>
+      <p class="desc">Формати файлів, калібровані критерії оцінки та «Red Flag» сповіщення — де система найчастіше ламається.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> IF-нода для перевірки формату файлів — обов'язково</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Ви налаштували тригер, який стежить за папкою на Google Drive. Ви завантажуєте туди аудіозаписи дзвінків. Але раптом ви випадково закинули туди скриншот <b>.png</b> або текстовий документ. Якщо n8n передасть картинку в ноду транскрибації (Whisper), вся система застрягне з критичною помилкою.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Обов'язково поставте ноду <b>IF</b> одразу після тригера. Налаштуйте умову: якщо розширення файлу містить <b>mp3, wav або m4a</b> — йдемо далі. Все інше — просто відкидаємо.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Як ШІ розуміє критерії оцінки — розжуйте йому</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Якщо ви просто напишете ШІ: <i>«Оціни емпатію менеджера від 1 до 5»</i>, він усім поставить 5, бо для ШІ «бути ввічливим» — це вже емпатія.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Розжуйте йому критерії в промпті. Наприклад:</p>
+        <ul class="bullets">
+          <li><b>5 балів:</b> якщо менеджер сказав <i>«Розумію вашу ситуацію, зараз усе вирішимо»</i>.</li>
+          <li><b>1 бал:</b> якщо менеджер ігнорував скарги клієнта або перебивав його.</li>
+        </ul>
+        <p>Тоді оцінки в Google Sheets будуть реальними, а не вигаданими.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Налаштування «Red Flag» сповіщення</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Логіка</div>
+        <p>Менеджеру не потрібно читати звіти про хороші дзвінки — на це немає часу. Йому потрібні тільки «пожежі».</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як правильно</div>
+        <p>Переконайтеся, що нода Slack/Telegram стоїть після IF-ноди, яка фільтрує: <b>overall_score &lt; 3</b>. Лише погані дзвінки мають генерувати сповіщення.</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Мислення архітектора</div>
+        <p>Оповіщення — це шум, якщо їх надто багато. Фільтруйте безжально: сповіщати тільки про критичне.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 5 -->
+  <section class="module" id="customer-m5">
+    <div class="module-banner">
+      <div class="tag">Модуль 5</div>
+      <h2>Замикаємо цикл сервісу: SLA, тікети та ескалації</h2>
+      <p class="desc">Chain of Thought, тестування SLA без очікування та оформлення кейсу для реального клієнта.</p>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">1.</span> Chain of Thought на практиці — змусьте ШІ думати вголос</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Просити ШІ: <i>«Прочитай текст і скажи: це спам чи клієнт?»</i>. ШІ одразу каже: «Спам». Але якщо задача складна, він часто помиляється без проміжного міркування.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Накажіть ШІ в промпті: <i>«В полі <b>reasoning</b> спочатку напиши 2–3 речення аналізу: чому ти вважаєш цей тікет важливим, які ключові слова ти знайшов. І тільки ПІСЛЯ цього став фінальний пріоритет»</i>.</p>
+      </div>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Чому це важливо</div>
+        <p>Коли ШІ спочатку пише логіку, точність його фінального рішення зростає в рази! Ментор буде прискіпливо дивитися на поле <b>reasoning</b> у вашій таблиці.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">2.</span> Як протестувати SLA без очікування 30 хвилин</h3>
+      <div class="callout c-error"><div class="head"><span class="mark">●</span>Типова помилка</div>
+        <p>Чекати реальні 30 хвилин, щоб перевірити, чи спрацює ескалація. Це втрачений час.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Зайдіть у свою Google-таблицю, знайдіть створений тестовий тікет і <b>вручну змініть час</b> у колонці <b>sla_deadline</b> на вчорашній день або на годину назад. Потім запустіть ноду SLA в n8n. Система миттєво побачить, що час вичерпано, і одразу надішле ескалаційне повідомлення в Slack/Telegram.</p>
+      </div>
+      <div class="callout c-tip"><div class="head"><span class="mark">★</span>Лайфхак</div>
+        <p>Цей прийом «підробки часу» в таблиці — стандартна практика тестування будь-яких часових тригерів.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <h3><span class="num">3.</span> Пакування кейсу в Notion — для клієнта, не для оцінки</h3>
+      <div class="callout c-why"><div class="head"><span class="mark">◆</span>Зміна фокусу</div>
+        <p>Уявіть, що вашу сторінку в Notion відкриває реальний замовник, який хоче заплатити вам $1 000 за автоматизацію. Йому байдуже, які ноди ви зв'язали. Його цікавить бізнес.</p>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Як треба</div>
+        <p>Приділіть увагу розділу <b>Results</b>. Не пишіть абстрактне «Стало краще». Напишіть бізнес-мовою:</p>
+        <ul class="bullets">
+          <li><i>«Швидкість відповіді на типові питання впала з 11 годин до 15 секунд».</i></li>
+          <li><i>«50 % рутинних запитів тепер закриває ШІ без залучення людей, що економить власнику $400/міс».</i></li>
+        </ul>
+      </div>
+      <div class="callout c-how"><div class="head"><span class="mark">✓</span>Loom-відео</div>
+        <p>Записуючи відео Loom, показуйте екран так, наче ви презентуєте продукт директору компанії. Trigger → Action → Result: клієнт пише лист → система класифікує → менеджер отримує тільки «пожежі».</p>
+      </div>
+    </div>
+
+    <div class="callout c-tip"><div class="head"><span class="mark">★</span>Фінальна настанова</div>
+      <p>Дотримуйтесь цих простих порад, робіть усе покроково і не бійтеся помилятися в n8n — <b>Execution History</b> завжди підкаже, де саме загубився ваш JSON. Успіхів!</p>
+    </div>
+  </section>
+
+  <hr class="fade">
+  <div class="footer">
+    Customer Services — це не про відповіді на листи, а про <b>побудову системи, яка сама себе контролює</b>. Правильний аналіз, жорсткі промпти, чистий JSON і бізнес-мова у фінальному кейсі — ось що відрізняє архітектора від виконавця.
+  </div>
+</section>
+
 </main>
 </div>
 
 <script>
   // ====== ROUTING ======
-  const VIEWS = ["home","prompt","marketing","sales"];
-  const BLOCK_LABELS = {prompt:"Prompt Engineering & AI Agents",marketing:"Marketing Automation",sales:"Sales Automation"};
+  const VIEWS = ["home","prompt","marketing","sales","customer"];
+  const BLOCK_LABELS = {prompt:"Prompt Engineering & AI Agents",marketing:"Marketing Automation",sales:"Sales Automation",customer:"Customer Services"};
 
   function parseHash(){
     const raw = (location.hash || "#home").replace(/^#/,"");
